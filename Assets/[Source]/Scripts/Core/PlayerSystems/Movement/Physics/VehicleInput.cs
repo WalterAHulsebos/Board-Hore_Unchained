@@ -13,11 +13,6 @@ namespace Core.PlayerSystems.Movement
         #region Variables
         
         public InputAction moveAction;
-        //public InputAction lookAction;
-
-        [Space] 
-        [ShowInInspector] private float _accelerateAxis;
-        [ShowInInspector] private float _brakingAxis;
 
         private Vector2 _moveInput;
         
@@ -41,18 +36,15 @@ namespace Core.PlayerSystems.Movement
             _vehicle.InputData = new PlayerInputs();
         }
         
-        private void Update()
-        {
-            HandleInputs();
-        }
+        private void Update() 
+            => HandleInputs();
 
         private void HandleInputs()
         {
             _moveInput = moveAction.ReadValue<Vector2>();
             
             //Forward/Reverse
-            //accelerateAxis = InputData.GetAxis("Vertical");
-            _vehicle.InputData.accelInput = _moveInput.y;
+            _vehicle.InputData.accelerationInput = _moveInput.y;
 
             //Steering
             _vehicle.InputData.steeringInput = _moveInput.x;
@@ -64,7 +56,7 @@ namespace Core.PlayerSystems.Movement
     [Serializable]
     public class PlayerInputs
     {
-        public float accelInput;
+        public float accelerationInput;
         public float steeringInput;
     }
 }

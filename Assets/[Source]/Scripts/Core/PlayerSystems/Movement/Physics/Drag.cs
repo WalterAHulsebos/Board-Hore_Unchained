@@ -8,18 +8,25 @@ using CommonGames.Utilities.Extensions;
 
 namespace Core.PlayerSystems.Movement
 {
-    [Serializable]
     public class Drag : VehicleBehaviour
     {
-        [Header("Drag")] public float linearDrag;
-        public float freeWheelDrag = 1f;
-        public float brakingDrag = 2f;
-        public float angularDrag = 3f;
+        #region Variables
+        
+        [SerializeField] private float 
+            linearDrag = 0.1f,
+            freeWheelDrag = 1f,
+            brakingDrag = 2f,
+            angularDrag = 3f;
+        
+        [SerializeField] private bool 
+            linearDragCheck = true,
+            brakingDragCheck = false,
+            freeWheelDragCheck = true;
 
-        public bool linearDragCheck = true;
-        public bool brakingDragCheck = false;
-        public bool freeWheelDragCheck = true;
+        #endregion
 
+        #region Methods
+        
         protected override void Start()
         {
             base.Start();
@@ -31,25 +38,29 @@ namespace Core.PlayerSystems.Movement
         {
             UpdateDrag(
                 _vehicle.rigidbody,
-                _vehicle.wheelData.grounded,
+                _vehicle.wheelsData.anyGrounded,
                 _vehicle.InputData,
                 _vehicle.SpeedData
             );
-
         }
 
         private void UpdateDrag(Rigidbody rb, bool grounded, PlayerInputs input, VehicleSpeed speedData)
         {
-            linearDragCheck = input.accelInput.Abs() < 0.05 || grounded;
+            linearDragCheck = input.accelerationInput.Abs() < 0.05 || grounded;
             float __linearDragToAdd = linearDragCheck ? linearDrag : 0;
 
-            brakingDragCheck = (input.accelInput < 0) && speedData.forwardSpeed > 0;
+            
+            brakingDragCheck = (input.accelerationInput < 0) && speedData.forwardSpeed > 0;
             float __brakingDragToAdd = brakingDragCheck ? brakingDrag : 0;
+            
 
-            freeWheelDragCheck = input.accelInput.Abs() < 0.02f && grounded;
+            freeWheelDragCheck = input.accelerationInput.Abs() < 0.02f && grounded;
             float __freeWheelDragToAdd = freeWheelDragCheck ? freeWheelDrag : 0;
+            
 
             rb.drag = __linearDragToAdd + __brakingDragToAdd + __freeWheelDragToAdd;
         }
+        
+        #endregion
     }
 }

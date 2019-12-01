@@ -6,78 +6,80 @@ using UnityEngine;
 
 using CommonGames.Utilities.CGTK;
 
+using JetBrains.Annotations;
+
 namespace Core.PlayerSystems.Movement
 {
-    [System.Serializable]
-    public class Wheels : VehicleBehaviour
+    [Serializable]
+    public partial class Wheels : VehicleBehaviour
     {
-        private Dictionary<Transform, WheelHitData> _mapWheelToLastHitCache = new Dictionary<Transform, WheelHitData>();
-
-        private class WheelHitData
-        {
-            public bool IsGrounded;
-            public RaycastHit GroundData;
-        }
+        #region Variables
         
-        public float wheelHeight = 0.5f;
-        public LayerMask groundCheckLayer = 1 << 1;
-        public WheelData wheelData;
+        //private Dictionary<Transform, WheelHitData> _mapWheelToLastHitCache = new Dictionary<Transform, WheelHitData>();
 
+        [SerializeField] private float wheelHeight = 0.5f;
+        [SerializeField] private LayerMask groundCheckLayer = 1 << 1;
+
+        [SerializeField] private WheelsData wheelsData = new WheelsData(wheels: new Wheel[4]);
+        
+        #endregion
+
+        #region Methods
+
+        /// <summary> Gets you the wheel at Index i </summary>
+        [PublicAPI]
+        public Wheel this[in int i] => wheelsData.wheels[i];
+
+        /*
+        /// <summary> Guesses your wheels are assigned in order from up left to bottom right. </summary>
+        [PublicAPI]
+        public Wheel this[in int x, in int y] => wheelsData.wheels[x*2 + y*2];
+        */
 
         protected override void Start()
         {
             base.Start();
             
-            foreach (Transform __wheel in wheelData.physicsWheelPoints)
+            /*
+            foreach(Transform __wheel in wheelsData.physicsWheelPoints)
             {
                 _mapWheelToLastHitCache[__wheel] = new WheelHitData();
             }
+            */
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             UpdateWheelStates();
-            _vehicle.wheelData = wheelData;
+            _vehicle.wheelsData = wheelsData;
         }
 
         private void UpdateWheelStates()
         {
             Vector3 __surfaceNormal = Vector3.zero;
 
-            wheelData.numberOfGroundedWheels = 0;
-            wheelData.grounded = false;
+            wheelsData.numberOfGroundedWheels = 0;
+            wheelsData.anyGrounded = false;
 
-            foreach (Transform __wheel in wheelData.physicsWheelPoints)
+            foreach(Wheel __wheel in wheelsData.wheels)
             {
-                Ray __ray = new Ray(__wheel.position, -__wheel.transform.up);
+                bool __isGrounded = __wheel.wheelController.isGrounded;
                 
-                bool __grounded = Physics.Raycast(__ray, out RaycastHit __hit, wheelHeight, groundCheckLayer);
+                __wheel.isGrounded = __isGrounded;
+                //__wheel.GroundData = __hit;
+                //CGDebug.DrawRay(__ray).Color(Color.yellow);
                 
-                CGDebug.DrawRay(__ray).Color(Color.yellow);
-
-                WheelHitData __wheelHitData = _mapWheelToLastHitCache[__wheel];
-
-                __wheelHitData.IsGrounded = __grounded;
-                __wheelHitData.GroundData = __hit;
-
-                if (!__grounded) continue;
-
-                wheelData.grounded = true;
-                wheelData.numberOfGroundedWheels += 1;
-
-                __surfaceNormal += __hit.normal;
+                if(!__isGrounded) continue;
+                
+                wheelsData.anyGrounded = true;
+                wheelsData.numberOfGroundedWheels++;
+                
+                //__surfaceNormal += __hit.normal;
             }
 
-            wheelData.averageWheelSurfaceNormal = __surfaceNormal.normalized;
+            wheelsData.averageWheelSurfaceNormal = __surfaceNormal.normalized;
         }
-    }
 
-    [Serializable]
-    public class WheelData
-    {
-        public Transform[] physicsWheelPoints;
-        public bool grounded;
-        public int numberOfGroundedWheels;
-        public Vector3 averageWheelSurfaceNormal;
+        #endregion
     }
 }
