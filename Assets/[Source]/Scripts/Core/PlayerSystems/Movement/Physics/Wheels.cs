@@ -39,13 +39,8 @@ namespace Core.PlayerSystems.Movement
         protected override void Start()
         {
             base.Start();
-            
-            /*
-            foreach(Transform __wheel in wheelsData.physicsWheelPoints)
-            {
-                _mapWheelToLastHitCache[__wheel] = new WheelHitData();
-            }
-            */
+
+            _vehicle.wheelsData = wheelsData;
         }
 
         private void FixedUpdate()
