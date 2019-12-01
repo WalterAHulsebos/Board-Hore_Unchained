@@ -22,7 +22,7 @@ namespace Core.PlayerSystems.Movement
         
         [ReadOnly]
         [NonSerialized]
-        [OdinSerialize] public Wheels.WheelsData wheelsData;
+        [OdinSerialize] public Wheels.WheelsData wheelsData = new Wheels.WheelsData();
         
         [ReadOnly]
         [OdinSerialize] public PlayerInputs InputData { get; set; }

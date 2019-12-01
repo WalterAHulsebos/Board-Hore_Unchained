@@ -58,6 +58,8 @@ namespace Core.PlayerSystems.Movement
                 }
             }
             */
+
+            public WheelsData() { }
             
             public WheelsData(Wheel[] wheels)
             {
