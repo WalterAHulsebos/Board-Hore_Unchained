@@ -122,6 +122,6 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _CloudColor: {r: 1, g: 1, b: 1, a: 0.5}
-    - _Color: {r: 1.0355797, g: 1.0355797, b: 1.0355797, a: 2}
+    - _Color: {r: 0.2073495, g: 0.23463751, b: 0.2618395, a: 2}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Speed: {r: 0.016666668, g: 0.01, b: -0.023333333, a: -0.1}

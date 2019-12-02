@@ -30,11 +30,11 @@ namespace CommonGames.Utilities.CGTK.Greasy
 				yield break;
 			}
 
-			float _time = 0f;
-			while(_time < duration)
+			float __time = 0f;
+			while(__time < duration)
 			{
-				onProgressChanged(_time / duration);
-				_time += Time.deltaTime;
+				onProgressChanged(__time / duration);
+				__time += Time.deltaTime;
 				yield return null;
 			}
 
@@ -42,9 +42,7 @@ namespace CommonGames.Utilities.CGTK.Greasy
 		}
 
 		private static IEnumerator Lerper(float duration, EaseMethod ease, Action<float> onProgressChanged)
-		{
-			return To(duration, time => onProgressChanged(ease(time)));
-		}
+			=> To(duration, time => onProgressChanged(ease(time)));
 	}
 
 	public static class Ease

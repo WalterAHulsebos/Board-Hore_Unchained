@@ -22,7 +22,7 @@ namespace Core.PlayerSystems.Movement
 
         private void FixedUpdate()
         {
-            ApplyLateralFriction(_vehicle.wheelData.grounded, _vehicle.rigidbody);
+            ApplyLateralFriction(_vehicle.wheelsData.anyGrounded, _vehicle.rigidbody);
         }
 
         private void CalculateLateralFriction(VehicleSpeed speedData)

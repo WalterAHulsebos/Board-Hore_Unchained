@@ -102,20 +102,17 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		public NotificationType notification = NotificationType.IPoolable;
 
 		/// <summary> Should this pool preload some clones? </summary>
-		[PropertyTooltip("Should this pool preload some clones?")]
+		[PropertyTooltip(tooltip: "Should this pool preload some clones?")]
 		[OdinSerialize] public int Preload { get; set; } = 5;
 
 		/// <summary> Should this pool have a maximum amount of clones it can spawn? (0 is infinite) </summary>
 		[PublicAPI]
-		[PropertyTooltip("Should this pool have a maximum amount of clones it can spawn? (0 is infinite)")]
+		[PropertyTooltip(tooltip: "Should this pool have a maximum amount of clones it can spawn? (0 is infinite)")]
 		[OdinSerialize] public int Capacity { get; set; } = 10;
 
 		/// <summary> If the pool reaches capacity, should new spawns force older ones to despawn? </summary>
 		[PublicAPI]
 		[OdinSerialize] public bool Recycle { get; set; } = true;
-
-		/// <summary>Should this pool be marked as DontDestroyOnLoad?</summary>
-		//public bool persist { get; set; } = false;
 
 		/// <summary> Should the spawned clones have their clone index appended to their name?</summary>
 		[PublicAPI]
@@ -156,7 +153,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			
 			for (int __i = Instances.Count - 1; __i >= 0; __i--)
 			{
-				GameObjectPool __pool = Instances[__i];
+				GameObjectPool __pool = Instances[index: __i];
 
 				if (__pool.prefab != prefab) continue;
 				
@@ -181,10 +178,10 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			
 			for (int __i = Instances.Count - 1; __i >= 0; __i--)
 			{
-				foundPool = Instances[__i];
+				foundPool = Instances[index: __i];
 
 				// Search hash set
-				if (foundPool._spawnedClonesHashSet.Contains(clone))
+				if (foundPool._spawnedClonesHashSet.Contains(item: clone))
 				{
 					return true;
 				}
@@ -192,7 +189,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 				// Search list
 				for (int __j = foundPool.spawnedClones.Count - 1; __j >= 0; __j--)
 				{
-					if (foundPool.spawnedClones[__j] == clone)
+					if (foundPool.spawnedClones[index: __j] == clone)
 					{
 						return true;
 					}
@@ -206,7 +203,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		[PublicAPI]
 		public static void GetEnsuredPoolByPrefab(GameObject prefab, out GameObjectPool foundPool)
 		{
-			TryFindPoolByPrefab(prefab, out foundPool);
+			TryFindPoolByPrefab(prefab: prefab, foundPool: out foundPool);
 			
 			if(foundPool != null) return;
 			
@@ -230,7 +227,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		public void Spawn()
 		{
 			Transform __transform = transform;
-			Spawn(__transform.position, __transform.rotation);
+			Spawn(position: __transform.position, rotation: __transform.rotation);
 		}
 
 		[PublicAPI]
@@ -238,7 +235,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		{
 			GameObject __clone = default(GameObject);
 
-			TrySpawn(position, rotation, parent, ref __clone);
+			TrySpawn(position: position, rotation: rotation, parent: parent, clone: ref __clone);
 
 			return __clone;
 		}
@@ -252,65 +249,65 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 				// Spawn a previously despawned/preloaded clone?
 				for (int __i = despawnedClones.Count - 1; __i >= 0; __i--)
 				{
-					clone = despawnedClones[__i];
+					clone = despawnedClones[index: __i];
 
-					despawnedClones.RemoveAt(__i);
+					despawnedClones.RemoveAt(index: __i);
 
 					if (clone != null)
 					{
-						SpawnClone(clone, position, rotation, parent);
+						SpawnClone(clone: clone, position: position, rotation: rotation, parent: parent);
 
 						return true;
 					}
 
-					CGDebug.LogWarning("This pool contained a null despawned clone, did you accidentally destroy it?", this);
+					CGDebug.LogWarning(message: "This pool contained a null despawned clone, did you accidentally destroy it?", context: this);
 				}
 
 				// Make a new clone?
 				if (Capacity <= 0 || Total < Capacity)
 				{
-					clone = CreateClone(position, rotation, parent);
+					clone = CreateClone(position: position, rotation: rotation, parent: parent);
 
 					// Add clone to spawned list
 					if (Recycle)
 					{
-						spawnedClones.Add(clone);
+						spawnedClones.Add(item: clone);
 					}
 					else
 					{
-						_spawnedClonesHashSet.Add(clone);
+						_spawnedClonesHashSet.Add(item: clone);
 					}
 
 					// Activate
 					clone.SetActive(true);
 
 					// Notifications
-					InvokeOnSpawn(clone);
+					InvokeOnSpawn(clone: clone);
 
 					return true;
 				}
 
 				// Recycle?
 				if (Recycle != true || 
-					TryDespawnOldest(ref clone, false) != true) return false;
+					TryDespawnOldest(clone: ref clone, false) != true) return false;
 				
-				SpawnClone(clone, position, rotation, parent);
+				SpawnClone(clone: clone, position: position, rotation: rotation, parent: parent);
 
 				return true;
 			}
 
-			 CGDebug.LogWarning("You're attempting to spawn from a pool with a null prefab", this);
+			 CGDebug.LogWarning(message: "You're attempting to spawn from a pool with a null prefab", context: this);
 
 			return false;
 		}
 
 		/// <summary>This will despawn the oldest prefab clone that is still spawned.</summary>
-		[ContextMenu("Despawn Oldest")]
+		[ContextMenu(itemName: "Despawn Oldest")]
 		public void DespawnOldest()
 		{
 			GameObject __clone = default(GameObject);
 
-			TryDespawnOldest(ref __clone, true);
+			TryDespawnOldest(clone: ref __clone, true);
 		}
 
 		private bool TryDespawnOldest(ref GameObject clone, bool registerDespawned)
@@ -326,19 +323,19 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 
 				if (clone != null)
 				{
-					DespawnNow(clone, registerDespawned);
+					DespawnNow(clone: clone, register: registerDespawned);
 
 					return true;
 				}
 
-				CGDebug.LogWarning("This pool contained a null spawned clone, did you accidentally destroy it?", this);
+				CGDebug.LogWarning(message: "This pool contained a null spawned clone, did you accidentally destroy it?", context: this);
 			}
 
 			return false;
 		}
 
 		/// <summary>This method will despawn all currently spawned prefabs managed by this pool. </summary>
-		[ContextMenu("Despawn All")]
+		[ContextMenu(itemName: "Despawn All")]
 		public void DespawnAll()
 		{
 			// Merge
@@ -347,11 +344,11 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			// Despawn
 			for (int __i = spawnedClones.Count - 1; __i >= 0; __i--)
 			{
-				GameObject __clone = spawnedClones[__i];
+				GameObject __clone = spawnedClones[index: __i];
 
 				if (__clone != null)
 				{
-					DespawnNow(__clone);
+					DespawnNow(clone: __clone);
 				}
 			}
 
@@ -360,7 +357,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			// Clear all delays
 			for (int __i = delays.Count - 1; __i >= 0; __i--)
 			{
-				ClassPool<Delay>.Despawn(delays[__i]);
+				ClassPool<Delay>.Despawn(instance: delays[index: __i]);
 			}
 
 			delays.Clear();
@@ -375,62 +372,62 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 				// Delay the despawn?
 				if (t > 0.0f)
 				{
-					DespawnWithDelay(clone, t);
+					DespawnWithDelay(clone: clone, t: t);
 				}
 				// Despawn now?
 				else
 				{
-					TryDespawn(clone);
+					TryDespawn(clone: clone);
 
 					// If this clone was marked for delayed despawn, remove it
 					for (int __i = delays.Count - 1; __i >= 0; __i--)
 					{
-						Delay __delay = delays[__i];
+						Delay __delay = delays[index: __i];
 
 						if (__delay.clone == clone)
 						{
-							delays.RemoveAt(__i);
+							delays.RemoveAt(index: __i);
 						}
 					}
 				}
 			}
 			else
 			{
-				CGDebug.LogWarning("You're attempting to despawn a null gameObject", this);
+				CGDebug.LogWarning(message: "You're attempting to despawn a null gameObject", context: this);
 			}
 		}
 
 		/// <summary>This method will create an additional prefab clone and add it to the despawned list. </summary>
-		[ContextMenu("Preload One")]
+		[ContextMenu(itemName: "Preload One")]
 		public void PreloadOne()
 		{
 			if (prefab != null)
 			{
 				// Create clone
-				GameObject __clone = CreateClone(Vector3.zero, Quaternion.identity, null);
+				GameObject __clone = CreateClone(position: Vector3.zero, rotation: Quaternion.identity, null);
 
 				// Add clone to despawned list
-				despawnedClones.Add(__clone);
+				despawnedClones.Add(item: __clone);
 
 				// Deactivate it
 				__clone.SetActive(false);
 
 				// Move it under this GO
-				__clone.transform.SetParent(transform, false);
+				__clone.transform.SetParent(parent: transform, false);
 
 				if (Capacity > 0 && Total > Capacity)
 				{
-					CGDebug.LogWarning("You've preloaded more than the pool capacity, please verify you're preloading the intended amount.", this);
+					CGDebug.LogWarning(message: "You've preloaded more than the pool capacity, please verify you're preloading the intended amount.", context: this);
 				}
 			}
 			else
 			{
-				CGDebug.LogWarning("Attempting to preload a null prefab.", this);
+				CGDebug.LogWarning(message: "Attempting to preload a null prefab.", context: this);
 			}
 		}
 
 		/// <summary>This will preload the pool based on the Preload setting. </summary>
-		[ContextMenu("Preload All")]
+		[ContextMenu(itemName: "Preload All")]
 		public void PreloadAll()
 		{
 			if (Preload <= 0) return;
@@ -444,7 +441,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			}
 			else 
 			{
-				CGDebug.LogWarning("Attempting to preload a null prefab", this);
+				CGDebug.LogWarning(message: "Attempting to preload a null prefab", context: this);
 			}
 		}
 		
@@ -461,13 +458,13 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		{
 			base.OnEnable();
 			
-			Instances.Add(this);
+			Instances.Add(item: this);
 		}
 		protected override void OnDisable()
 		{
 			base.OnDisable();
 			
-			Instances.Remove(this);
+			Instances.Remove(item: this);
 		}
 
 		protected virtual void Update()
@@ -475,7 +472,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			// Decay the life of all delayed destruction calls
 			for (int __i = delays.Count - 1; __i >= 0; __i--)
 			{
-				Delay __delay = delays[__i];
+				Delay __delay = delays[index: __i];
 
 				__delay.life -= Time.deltaTime;
 
@@ -486,16 +483,16 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 				}
 
 				// Remove and pool delay
-				delays.RemoveAt(__i); ClassPool<Delay>.Despawn(__delay);
+				delays.RemoveAt(index: __i); ClassPool<Delay>.Despawn(instance: __delay);
 
 				// Finally despawn it after delay
 				if (__delay.clone != null)
 				{
-					Despawn(__delay.clone);
+					Despawn(clone: __delay.clone);
 				}
 				else
 				{
-					CGDebug.LogWarning("Attempting to update the delayed destruction of a prefab clone that no longer exists, did you accidentally delete it?", this);
+					CGDebug.LogWarning(message: "Attempting to update the delayed destruction of a prefab clone that no longer exists, did you accidentally delete it?", context: this);
 				}
 			}
 		}
@@ -505,7 +502,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			// If this object is already marked for delayed despawn, update the time and return
 			for (int __i = delays.Count - 1; __i >= 0; __i--)
 			{
-				Delay __delay = delays[__i];
+				Delay __delay = delays[index: __i];
 
 				if (__delay.clone != clone) continue;
 				
@@ -523,18 +520,18 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			__newDelay.clone = clone;
 			__newDelay.life  = t;
 
-			delays.Add(__newDelay);
+			delays.Add(item: __newDelay);
 		}
 
 		private void TryDespawn(GameObject clone)
 		{
-			if (_spawnedClonesHashSet.Remove(clone) || spawnedClones.Remove(clone))
+			if (_spawnedClonesHashSet.Remove(item: clone) || spawnedClones.Remove(item: clone))
 			{
-				DespawnNow(clone);
+				DespawnNow(clone: clone);
 			}
 			else
 			{
-				CGDebug.LogWarning("You're attempting to despawn a GameObject that wasn't spawned from this pool, make sure your Spawn and Despawn calls match.", clone);
+				CGDebug.LogWarning(message: "You're attempting to despawn a GameObject that wasn't spawned from this pool, make sure your Spawn and Despawn calls match.", context: clone);
 			}
 		}
 
@@ -543,22 +540,22 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			// Add clone to despawned list
 			if (register)
 			{
-				despawnedClones.Add(clone);
+				despawnedClones.Add(item: clone);
 			}
 
 			// Messages?
-			InvokeOnDespawn(clone);
+			InvokeOnDespawn(clone: clone);
 
 			// Deactivate it
 			clone.SetActive(false);
 
 			// Move it under this GO
-			clone.transform.SetParent(transform, false);
+			clone.transform.SetParent(parent: transform, false);
 		}
 
 		private GameObject CreateClone(Vector3 position, Quaternion rotation, Transform parent)
 		{
-			GameObject __clone = Instantiate(prefab, position, rotation);
+			GameObject __clone = Instantiate(original: prefab, position: position, rotation: rotation);
 
 			if (Stamp)
 			{
@@ -569,7 +566,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 				__clone.name = prefab.name;
 			}
 
-			__clone.transform.SetParent(parent, false);
+			__clone.transform.SetParent(parent: parent, false);
 
 			return __clone;
 		}
@@ -578,11 +575,11 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			// Register
 			if (Recycle)
 			{
-				spawnedClones.Add(clone);
+				spawnedClones.Add(item: clone);
 			}
 			else
 			{
-				_spawnedClonesHashSet.Add(clone);
+				_spawnedClonesHashSet.Add(item: clone);
 			}
 
 			// Update transform
@@ -591,13 +588,13 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			__cloneTransform.localPosition = position;
 			__cloneTransform.localRotation = rotation;
 
-			__cloneTransform.SetParent(parent, false);
+			__cloneTransform.SetParent(parent: parent, false);
 
 			// Activate
 			clone.SetActive(true);
 
 			// Notifications
-			InvokeOnSpawn(clone);
+			InvokeOnSpawn(clone: clone);
 		}
 
 		private void InvokeOnSpawn(GameObject clone)
@@ -605,12 +602,12 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			switch (notification)
 			{
 				case NotificationType.IPoolable: 
-					clone.GetComponents(TempPoolables);
-					TempPoolables.For(component => component.OnSpawn());
+					clone.GetComponents(results: TempPoolables);
+					TempPoolables.For(action: component => component.OnSpawn());
 					break;
 				case NotificationType.BroadcastIPoolable: 
-					clone.GetComponentsInChildren(TempPoolables); 
-					TempPoolables.For(component => component.OnSpawn());
+					clone.GetComponentsInChildren(results: TempPoolables); 
+					TempPoolables.For(action: component => component.OnSpawn());
 					break;
 				case NotificationType.None:
 					break;
@@ -623,12 +620,12 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			switch (notification)
 			{
 				case NotificationType.IPoolable: 
-					clone.GetComponents(TempPoolables); 
-					TempPoolables.For(component => component.OnDespawn());
+					clone.GetComponents(results: TempPoolables); 
+					TempPoolables.For(action: component => component.OnDespawn());
 					break;
 				case NotificationType.BroadcastIPoolable: 
-					clone.GetComponentsInChildren(TempPoolables); 
-					TempPoolables.For(component => component.OnDespawn());
+					clone.GetComponentsInChildren(results: TempPoolables); 
+					TempPoolables.For(action: component => component.OnDespawn());
 					break;
 				case NotificationType.None:
 					break;
@@ -641,7 +638,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		{
 			if (_spawnedClonesHashSet.Count <= 0) return;
 			
-			spawnedClones.AddRange(_spawnedClonesHashSet);
+			spawnedClones.AddRange(collection: _spawnedClonesHashSet);
 
 			_spawnedClonesHashSet.Clear();
 		}
@@ -661,9 +658,9 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			
 			for (int __i = spawnedClones.Count - 1; __i >= 0; __i--)
 			{
-				GameObject __clone = spawnedClones[__i];
+				GameObject __clone = spawnedClones[index: __i];
 
-				_spawnedClonesHashSet.Add(__clone);
+				_spawnedClonesHashSet.Add(item: __clone);
 			}
 
 			spawnedClones.Clear();

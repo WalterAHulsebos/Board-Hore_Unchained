@@ -207,11 +207,19 @@ namespace CommonGames.Utilities.Extensions
 			return (__closestVector, __indexOfClosest, __secondClosestVector, __indexOfSecondClosest);
 		}
 		
+		/*
+		/// <summary>
+		/// Calculates the combined Distance of this List/Array of Vector3's.
+		/// </summary>
+		/// <param name="vectors"></param>
+		/// <returns></returns>
 		[PublicAPI]
 		public static float CombinedDistanceInOrder(this IEnumerable<Vector3> vectors)
 		{
 			float __combinedDistance = 0f;
 
+			if(vectors == null) goto RETURN;
+			
 			Vector3? __lastVector = null;
 			foreach(Vector3 __vector in vectors) //Normal for loop wasn't possible because we use an IEnumerable instead of an array or list.
 			{
@@ -226,6 +234,47 @@ namespace CommonGames.Utilities.Extensions
 				__lastVector = __vector;
 			}
 			
+			RETURN:
+			return __combinedDistance;
+		}
+		*/
+		
+		/// <summary>
+		/// Calculates the combined Distance of this List/Array of Vector3's.
+		/// </summary>
+		/// <param name="positions"></param>
+		[PublicAPI]
+		public static float CombinedDistance(this Vector3[] positions)
+			=> CombinedDistanceInOrder(positions: positions);
+
+		/// <summary>
+		/// Calculates the combined Distance of this List/Array of Vector3's.
+		/// </summary>
+		/// <param name="positions"></param>
+		[PublicAPI]
+		public static float CombinedDistance(this IEnumerable<Vector3> positions)
+			=> CombinedDistanceInOrder(positions: positions);
+		
+		/// <summary>
+		/// Calculates the combined Distance of this List/Array of Vector3's.
+		/// </summary>
+		/// <param name="positions"></param>
+		[PublicAPI]
+		public static float CombinedDistanceInOrder(in IEnumerable<Vector3> positions)
+		{
+			float __combinedDistance = 0f;
+
+			if(positions == null) goto RETURN;
+			
+			Vector3 __lastPosition = positions.First();
+			foreach(Vector3 position in positions) //Normal for loop wasn't possible because we use an IEnumerable instead of an array or list.
+			{
+				__combinedDistance += position.DistanceTo(to: __lastPosition);
+
+				__lastPosition = position;
+			}
+
+			RETURN:
 			return __combinedDistance;
 		}
 		
@@ -295,6 +344,17 @@ namespace CommonGames.Utilities.Extensions
 		#endregion
 		
 		#region Math Operations
+		
+		/// <summary> Create vector of direction "vector" with length "size" </summary>
+		[PublicAPI]
+		public static Vector3 SetVectorLength(this Vector3 vector, float size)
+		{
+			//Normalize
+			Vector3 __vectorNormalized = Vector3.Normalize(vector);
+ 
+			//Scale
+			return __vectorNormalized *= size;
+		}
 		
 		/// <summary>
 		/// Mirrors a Vector in desired  Axis

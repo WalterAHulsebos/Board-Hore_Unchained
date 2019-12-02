@@ -66,5 +66,20 @@ namespace CommonGames.Utilities.Extensions
         [PublicAPI]
         public const float GOLDEN_ANGLE = Mathf.PI * (3 - SQRT_5);
 
+        /// <summary> PI times 2. </summary>
+        [PublicAPI]
+        public const float PI_2 = Mathf.PI * 2;
+        
+        /// <summary> PI times 4. </summary>
+        [PublicAPI]
+        public const float PI_4 = PI_2* 2;
+
+        /// <summary> PI times 8. </summary>
+        [PublicAPI]
+        public const float PI_8 = PI_4 * 2;
+        
+        /// <summary> PI times 16. </summary>
+        [PublicAPI]
+        public const float PI_16 = PI_8 * 2;
     }
 }

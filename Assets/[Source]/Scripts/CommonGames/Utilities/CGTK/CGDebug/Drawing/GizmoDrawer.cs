@@ -1,52 +1,51 @@
-﻿using Sirenix.Utilities;
-using CommonGames.Utilities.Extensions;
-using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using System.Linq;
-using CommonGames.Utilities;
-using static CommonGames.Utilities.CGTK.CGDebug;
-
-using JetBrains.Annotations;
-
-namespace CommonGames.Utilities.CGTK
+﻿namespace CommonGames.Utilities.CGTK
 {
-    
-    public sealed class GizmoDrawer : Singleton<GizmoDrawer>
+    using CommonGames.Utilities.Extensions;
+    using UnityEngine;
+    using System.Collections.Generic;
+    using CommonGames.Utilities;
+    using static CommonGames.Utilities.CGTK.CGDebug;
+
+    using JetBrains.Annotations;
+
+    public static partial class CGDebug
     {
-        private readonly List<Gizmo> gizmos = new List<CGDebug.Gizmo>();
-    
-        private void Update()
-            => gizmos.For(gizmo => gizmo.durationLeft -= Time.deltaTime);
-    
-        private void OnDrawGizmos()
+        public sealed class GizmoDrawer : EnsuredSingleton<GizmoDrawer>
         {
-            foreach (Gizmo _gizmo in gizmos)
+            private readonly List<Gizmo> _gizmos = new List<CGDebug.Gizmo>();
+
+            private void Update()
+                => _gizmos.For(gizmo => gizmo.durationLeft -= Time.deltaTime);
+
+            private void OnDrawGizmos()
             {
-                Color _prevColor = Gizmos.color;
-                Matrix4x4 _prevMatrix = Gizmos.matrix;
-                Gizmos.color = _gizmo.color;
-    
-                if (_gizmo.matrix != default)
+                foreach(Gizmo _gizmo in _gizmos)
                 {
-                    Gizmos.matrix = _gizmo.matrix;
+                    Color __prevColor = Gizmos.color;
+                    Matrix4x4 __prevMatrix = Gizmos.matrix;
+                    Gizmos.color = _gizmo.color;
+
+                    if(_gizmo.matrix != default)
+                    {
+                        Gizmos.matrix = _gizmo.matrix;
+                    }
+
+                    _gizmo.action();
+
+                    Gizmos.color = __prevColor;
+                    Gizmos.matrix = __prevMatrix;
                 }
-                _gizmo.action();
-    
-                Gizmos.color = _prevColor;
-                Gizmos.matrix = _prevMatrix;
+
+                _gizmos.CGRemoveAll(gizmo => gizmo.durationLeft <= 0);
             }
-            
-            gizmos.CGRemoveAll(gizmo => gizmo.durationLeft <= 0);
+
+            [PublicAPI]
+            public static void Draw(in Gizmo drawing)
+                => Instance._gizmos.Add(drawing);
+
+            [PublicAPI]
+            public static void Draw(params Gizmo[] drawings)
+                => Instance._gizmos.AddRange(drawings);
         }
-    
-        [PublicAPI]
-        public static void Draw(in Gizmo drawing)
-            => Instance.gizmos.Add(drawing);
-        
-        [PublicAPI]
-        public static void Draw(params Gizmo[] drawings)
-            => Instance.gizmos.AddRange(drawings);
     }
 }

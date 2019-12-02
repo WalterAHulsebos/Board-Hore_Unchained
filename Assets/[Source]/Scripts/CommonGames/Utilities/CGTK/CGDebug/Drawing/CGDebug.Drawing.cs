@@ -44,24 +44,24 @@
         /// <summary> Draw a solid box with position and size.</summary>
         [PublicAPI]
         public static Gizmo DrawCube(Vector3 position, Vector3 size = default)
-            => Draw(new Gizmo(() => Gizmos.DrawCube(position, size)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawCube(center: position, size: size)));
 
         /// <summary> Draw a wireframe box with position and size.</summary>
         [PublicAPI]
         public static Gizmo DrawWireCube(Vector3 position, Vector3 size = default)
-            => Draw(new Gizmo(() => Gizmos.DrawWireCube(position, size)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawWireCube(center: position, size: size)));
 
         /// <summary> Draw a camera frustum using the currently set Gizmos.matrix for it's location and rotation. </summary>
         [PublicAPI]
         public static Gizmo DrawFrustum(Camera camera)
-            => Draw(new Gizmo(() => Gizmos.DrawFrustum(camera.transform.position, camera.fieldOfView,
-                camera.farClipPlane, camera.nearClipPlane, camera.aspect)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawFrustum(center: camera.transform.position, fov: camera.fieldOfView,
+                maxRange: camera.farClipPlane, minRange: camera.nearClipPlane, aspect: camera.aspect)));
 
         /// <summary> Draw a camera frustum using the currently set Gizmos.matrix for it's location and rotation. </summary>
         [PublicAPI]
         public static Gizmo DrawFrustum(Vector3 position, float fieldOfView, float nearClipPlane, float farClipPlane,
             float aspect)
-            => Draw(new Gizmo(() => Gizmos.DrawFrustum(position, fieldOfView, farClipPlane, nearClipPlane, aspect)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawFrustum(center: position, fov: fieldOfView, maxRange: farClipPlane, minRange: nearClipPlane, aspect: aspect)));
 
         [PublicAPI]
         public static Gizmo DrawGUITexture(Rect screenRect,
@@ -72,32 +72,32 @@
             int bottomBorder,
             Material mat)
         {
-            return Draw(new Gizmo(() =>
-                Gizmos.DrawGUITexture(screenRect, texture, leftBorder, rightBorder, topBorder, bottomBorder, mat)));
+            return Draw(gizmo: new Gizmo(action: () =>
+                Gizmos.DrawGUITexture(screenRect: screenRect, texture: texture, leftBorder: leftBorder, rightBorder: rightBorder, topBorder: topBorder, bottomBorder: bottomBorder, mat: mat)));
         }
 
         [PublicAPI]
         public static Gizmo DrawIcon(Vector3 center, string name, bool allowScaling = true)
-            => Draw(new Gizmo(() => Gizmos.DrawIcon(center, name, allowScaling)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawIcon(center: center, name: name, allowScaling: allowScaling)));
 
         [PublicAPI]
         public static Gizmo DrawRay(Vector3 from, Vector3 direction)
-            => Draw(new Gizmo(() => Gizmos.DrawRay(from, direction)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawRay(@from: from, direction: direction)));
 
         [PublicAPI]
         public static Gizmo DrawRay(Ray ray)
-            => Draw(new Gizmo(() => Gizmos.DrawRay(ray)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawRay(r: ray)));
         
         [PublicAPI]
         public static Gizmo DrawLine(Vector3 start, Vector3 end)
-            => Draw(new Gizmo(() => Gizmos.DrawLine(start, end)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawLine(@from: start, to: end)));
 
         [PublicAPI]
         public static Gizmo DrawSphere(Vector3 center, float radius = 1f)
-            => Draw(new Gizmo(() => Gizmos.DrawSphere(center, radius)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawSphere(center: center, radius: radius)));
         [PublicAPI]
         public static Gizmo DrawWireSphere(Vector3 center, float radius = default)
-            => Draw(new Gizmo(() => Gizmos.DrawWireSphere(center, radius)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawWireSphere(center: center, radius: radius)));
 
         [PublicAPI]
         public static Gizmo DrawMesh(Mesh mesh,
@@ -105,7 +105,7 @@
             Vector3 position = default,
             Quaternion rotation = default,
             Vector3 scale = default) 
-            => Draw(new Gizmo(() => Gizmos.DrawMesh(mesh, submeshIndex, position, rotation, scale)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawMesh(mesh: mesh, submeshIndex: submeshIndex, position: position, rotation: rotation, scale: scale)));
         
         //(Mesh mesh, Vector3 position = Vector3.zero, Quaternion rotation = Quaternion.identity, Vector3 scale = Vector3.one)
         
@@ -115,7 +115,7 @@
             Vector3 position = default,
             Quaternion rotation = default,
             Vector3 scale = default)
-            => Draw(new Gizmo(() => Gizmos.DrawWireMesh(mesh, submeshIndex, position, rotation, scale)));
+            => Draw(gizmo: new Gizmo(action: () => Gizmos.DrawWireMesh(mesh: mesh, submeshIndex: submeshIndex, position: position, rotation: rotation, scale: scale)));
         
         /*
         public static Gizmo DrawWireMesh(Mesh mesh,
@@ -170,7 +170,7 @@
         
         private static Gizmo[] Draw(params Gizmo[] gizmos)
         {
-            GizmoDrawer.Draw(gizmos);
+            GizmoDrawer.Draw(drawings: gizmos);
             return gizmos;
         }
 
