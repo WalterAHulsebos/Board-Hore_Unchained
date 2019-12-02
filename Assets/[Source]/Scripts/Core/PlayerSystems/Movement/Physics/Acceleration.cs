@@ -67,7 +67,7 @@ namespace Core.PlayerSystems.Movement
                 currentVelocity: ref _xAxisVelocity, 
                 smoothTime:0.12f);
 
-            foreach(Wheel __wheel in _wheelsData.wheels)
+            foreach(Wheel __wheel in _vehicle.wheelsData.wheels)
             {
                 //__wheel.wheelController.brakeTorque = Input.GetKey(key: KeyCode.Space) ? maxBrakeTorque : 0.0f;
 

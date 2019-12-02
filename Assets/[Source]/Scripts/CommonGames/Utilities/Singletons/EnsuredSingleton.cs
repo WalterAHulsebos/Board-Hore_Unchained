@@ -91,28 +91,58 @@ namespace CommonGames.Utilities
             get
             {
                 if (_beingDestroyed) { return null; }
+                    
+                if (_instance != null) { return _instance; }
 
-                lock (obj)
+                GameObject __singletonGameObject = new GameObject {name = $"{typeof(T)} singleton"};
+                _instance = __singletonGameObject.AddComponent<T>();
+
+                return _instance;
+                
+                /*
+                //If we're in Edit-Mode.
+                if(Application.isEditor && !Application.isPlaying)
                 {
-                    if (_instance != null) { return _instance; }
+                    if (_beingDestroyed) { return null; }
                     
-                    GameObject singletonGameObject = new GameObject {name = $"{typeof(T)} singleton"};
-                    _instance = singletonGameObject.AddComponent<T>();
-                    
-                    return _instance;
+                    if (_instance != null)
+                    {
+                        Destroy(_instance.gameObject);
+                    }
+                    else
+                    {
+                        goto CreateSingletonObject;
+                    }
                 }
+                else
+                {
+                    if (_beingDestroyed) { return null; }
+                    
+                    if (_instance != null) { return _instance; }
+                
+                    //CreateSingletonObject:
+                    
+                    GameObject __singletonGameObject = new GameObject {name = $"{typeof(T)} singleton"};
+                    _instance = __singletonGameObject.AddComponent<T>();   
+                }
+
+                return _instance;
+                */
             }
                     
             protected set => _instance = value;
         }
         
+        // ReSharper disable once StaticMemberInGenericType
         private static bool _beingDestroyed = false;
 
         protected virtual void OnEnable()
         {
+            _beingDestroyed = default;
+            
             if (_instance != null)
             {
-                Destroy(gameObject);
+                Destroy(obj: gameObject);
             }
             else
             {

@@ -31,7 +31,7 @@ namespace Core.PlayerSystems.Movement.Abilities
         //public EndOfPathInstruction endOfPathInstruction;
         [SerializeField] private float 
             speed = 17.5f, 
-            bailForce = 17.5f, 
+            bailForce = 175.0f, 
             bailUpPercentage = 0.2f, 
             
             offsetFromBar = 0.5f;
@@ -135,7 +135,7 @@ namespace Core.PlayerSystems.Movement.Abilities
             Transform __rigidbodyTransform = __rigidbody.transform;
             Vector3 __direction = Vector3.SlerpUnclamped(a: __rigidbodyTransform.forward, b: __rigidbodyTransform.up, t: bailUpPercentage);
 
-            __rigidbody.AddForceAtPosition(force: bailForce * __direction, position: __rigidbody.position, mode: ForceMode.Impulse);
+            __rigidbody.AddForceAtPosition(force: __direction.SetVectorLength(bailForce), position: __rigidbody.worldCenterOfMass, mode: ForceMode.Impulse);
             
             _vehicle.mayMove--;
         }

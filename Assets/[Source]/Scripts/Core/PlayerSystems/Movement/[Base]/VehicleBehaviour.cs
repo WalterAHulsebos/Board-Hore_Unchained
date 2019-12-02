@@ -23,7 +23,7 @@ namespace Core.PlayerSystems.Movement
         #region Variables
         
         //Ja Jan, dit kan wel met een interface zodat het niet op MonoBehaviour vast zit maar dan heeft het geen Start, en ik wil dat dat automatisch gaat.
-        protected VehicleCore _vehicle;
+        [SerializeField] protected VehicleCore _vehicle;
         
         /// <summary> The Index of our VehicleCore reference in it's <see cref="IndexedMultiton"/>'s List </summary>
         public int VehicleIndex { get; set; }
@@ -32,9 +32,11 @@ namespace Core.PlayerSystems.Movement
 
         #region Methods
 
+        protected virtual void Start() => SetupReferences();
+
         /// <summary> Sets the <see cref= "_vehicle"/> VehicleCore reference to this vehicle's VehicleCore </summary>
-        protected virtual void Start() 
-            => _vehicle = _vehicle ? _vehicle : VehicleCore.Instance;
+        public void SetupReferences()
+            => _vehicle = _vehicle ? _vehicle : VehicleCore.Instances[VehicleIndex];
 
         #endregion
     }

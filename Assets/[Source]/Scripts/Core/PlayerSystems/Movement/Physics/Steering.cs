@@ -16,15 +16,7 @@ namespace Core.PlayerSystems.Movement
         [SerializeField] private float
             maxSteeringAngle = 35,
             minSteeringAngle = 20;
-
-        //public float baseTurningForce = 20f;
-        //public float speedFactorOffset = 0.5f;
         
-        //[Space] 
-        
-        //public float currentTurningForce;
-
-        private Rigidbody _rigidbody;
         private WheelsData _wheelsData;
 
         private float 
@@ -39,8 +31,6 @@ namespace Core.PlayerSystems.Movement
         protected override void Start()
         {
             base.Start();
-
-            _rigidbody = _vehicle.rigidbody;
             
             //_vehicle.SpeedData = new VehicleSpeed(velocityTimeCurve.keys[velocityTimeCurve.length - 1].value);
 

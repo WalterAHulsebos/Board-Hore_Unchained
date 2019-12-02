@@ -27,9 +27,9 @@ namespace Core.PlayerSystems.Movement
         {
             public Wheels.Wheel[] wheels = new Wheel[4];
             
-            [HideInInspector] public bool anyGrounded = default;
+            [HideInInspector] public bool anyGrounded = false;
             
-            [HideInInspector] public int numberOfGroundedWheels = default;
+            [HideInInspector] public int numberOfGroundedWheels = 0;
             
             [HideInInspector] public Vector3 averageWheelSurfaceNormal = default;
 
@@ -58,10 +58,10 @@ namespace Core.PlayerSystems.Movement
                 }
             }
             */
-
-            public WheelsData() { }
             
-            public WheelsData(Wheel[] wheels)
+            public WheelsData(){}
+            
+            public WheelsData(in Wheel[] wheels)
             {
                 this.wheels = wheels;
             }

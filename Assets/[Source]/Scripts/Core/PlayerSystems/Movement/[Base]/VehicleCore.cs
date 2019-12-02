@@ -5,6 +5,7 @@ using UnityEngine;
 
 using CommonGames.Utilities;
 using CommonGames.Utilities.Extensions;
+using CommonGames.Utilities.Helpers;
 using CommonGames.Utilities.CGTK;
 
 using Sirenix.OdinInspector;
@@ -14,7 +15,7 @@ using JetBrains.Annotations;
 
 namespace Core.PlayerSystems.Movement
 {
-    public class VehicleCore : Singleton<VehicleCore>
+    public class VehicleCore : IndexedMultiton<VehicleCore>
     {
         #region Variables
 
@@ -62,10 +63,15 @@ namespace Core.PlayerSystems.Movement
         private void Start()
         {
             rigidbody = GetComponentInChildren<Rigidbody>();
+            
+            InitializeVehicleBehaviours();
         }
 
         private void Update()
         {
+            if(PrefabCheckHelper.CheckIfPrefab(this)) return;
+            if(!Application.isPlaying) return;
+            
             groundedDebug = Grounded;
             
             switch (_prevGroundedState)
@@ -79,6 +85,17 @@ namespace Core.PlayerSystems.Movement
             }
 
             _prevGroundedState = wheelsData.anyGrounded;
+        }
+
+        private void InitializeVehicleBehaviours()
+        {
+            VehicleBehaviour[] __components = GetComponentsInChildren<VehicleBehaviour>();
+
+            foreach(VehicleBehaviour __component in __components)
+            {
+                __component.VehicleIndex = this.Index;
+                __component.SetupReferences();
+            }
         }
 
         [PublicAPI]

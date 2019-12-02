@@ -37,13 +37,13 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		{
 			T __instance = default(T);
 
-			TrySpawn(onSpawn, ref __instance);
+			TrySpawn(onSpawn, __instance);
 
 			return __instance;
 		}
 
 		[PublicAPI]
-		public static bool TrySpawn(Action<T> onSpawn, ref T instance)
+		public static bool TrySpawn(Action<T> onSpawn, T instance)
 		{
 			int __count = Cache.Count;
 
@@ -69,13 +69,13 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		{
 			T __instance = default(T);
 
-			TrySpawn(match, ref __instance);
+			TrySpawn(match, __instance);
 
 			return __instance;
 		}
 
 		[PublicAPI]
-		public static bool TrySpawn(Predicate<T> match, ref T instance)
+		public static bool TrySpawn(Predicate<T> match, T instance)
 		{
 			int __index = Cache.FindIndex(match);
 
@@ -99,13 +99,13 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		{
 			T __instance = default(T);
 
-			TrySpawn(match, onSpawn, ref __instance);
+			TrySpawn(match, onSpawn, __instance);
 
 			return __instance;
 		}
 
 		[PublicAPI]
-		public static bool TrySpawn(Predicate<T> match, Action<T> onSpawn, ref T instance)
+		public static bool TrySpawn(Predicate<T> match, Action<T> onSpawn, T instance)
 		{
 			int __index = Cache.FindIndex(match);
 

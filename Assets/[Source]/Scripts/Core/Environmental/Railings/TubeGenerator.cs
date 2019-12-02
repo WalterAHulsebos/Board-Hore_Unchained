@@ -182,7 +182,7 @@ namespace Core.Environmental.Railings
 					break;
 			}
 
-			Length = Points.CombinedDistanceInOrder();
+			Length = Points.CombinedDistance();
 			
 			Units = Length.FloorToInt();
 
@@ -233,7 +233,7 @@ namespace Core.Environmental.Railings
 		{
 			if(Points == null || Points.Count <= 1) return;
 			
-			Length = Points.CombinedDistanceInOrder();
+			Length = Points.CombinedDistance();
 			Units = Length.Floor();
 			
 			if(float.IsNaN(Units) || Units <= 0) return;

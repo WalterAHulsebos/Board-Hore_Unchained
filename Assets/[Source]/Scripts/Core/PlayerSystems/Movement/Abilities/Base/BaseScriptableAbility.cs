@@ -4,13 +4,15 @@ using UnityEngine.InputSystem.Interactions;
 
 namespace Core.PlayerSystems.Movement.Abilities
 {
-    public abstract class BaseScriptableAbility : ScriptableObject, IAbility
+    public abstract class BaseScriptableAbility : ScriptableObject, IAbility, IActorIndex
     {
         #region Variables
         
         public InputAction abilityAction;
         
         protected VehicleCore _vehicle;
+
+        public int VehicleIndex { get; set; }
         
         public float DeltaTime { get; set; }
         public float FixedDeltaTime { get; set; }
@@ -31,7 +33,7 @@ namespace Core.PlayerSystems.Movement.Abilities
 
         public virtual void Initialize()
         {
-            _vehicle = VehicleCore.Instance;
+            _vehicle = VehicleCore.Instances[VehicleIndex];
         }
 
         public void AbilityUpdate()
@@ -48,6 +50,5 @@ namespace Core.PlayerSystems.Movement.Abilities
         public abstract void DoAbility();
         
         #endregion
-
     }
 }
