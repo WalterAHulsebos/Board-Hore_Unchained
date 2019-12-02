@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\[Projects]\[Group]\Board-Hore_Unchained" t="IncludeRecursive">
@@ -138,308 +138,6 @@
                     <e p="PlayerCamera.cs" t="Include" />
                     <e p="PlayerConfigs.cs" t="Include" />
                     <e p="PlayerController.cs" t="Include" />
-                  </e>
-                  <e p="Skate4" t="Include">
-                    <e p="AABBCheck.cs" t="Include" />
-                    <e p="Bail.cs" t="Include" />
-                    <e p="Board" t="Include">
-                      <e p="AnimationController.cs" t="Include" />
-                      <e p="BoardController.cs" t="Include" />
-                      <e p="ButtonControl.cs" t="Include" />
-                      <e p="DeckSounds.cs" t="Include" />
-                      <e p="Grind" t="Include">
-                        <e p="GrindCollisions.cs" t="Include" />
-                        <e p="GrindDetection.cs" t="Include" />
-                        <e p="GrindingStateEvents.cs" t="Include" />
-                        <e p="GrindStateEvents.cs" t="Include" />
-                        <e p="GrindTrigger.cs" t="Include" />
-                      </e>
-                      <e p="PlayerController.cs" t="Include" />
-                      <e p="PlayerPrefsManager.cs" t="Include" />
-                      <e p="PlayerState_Bailed.cs" t="Include" />
-                      <e p="PlayerState_BeginPop.cs" t="Include" />
-                      <e p="PlayerState_Braking.cs" t="Include" />
-                      <e p="PlayerState_Grinding.cs" t="Include" />
-                      <e p="PlayerState_Impact.cs" t="Include" />
-                      <e p="PlayerState_InAir.cs" t="Include" />
-                      <e p="PlayerState_Manualling.cs" t="Include" />
-                      <e p="PlayerState_OffBoard.cs" t="Include" />
-                      <e p="PlayerState_OnBoard.cs" t="Include" />
-                      <e p="PlayerState_Pop.cs" t="Include" />
-                      <e p="PlayerState_Pushing.cs" t="Include" />
-                      <e p="PlayerState_Released.cs" t="Include" />
-                      <e p="PlayerState_Riding.cs" t="Include" />
-                      <e p="PlayerState_Setup.cs" t="Include" />
-                      <e p="PlayerStateMachine.cs" t="Include" />
-                    </e>
-                    <e p="ButtonHighlighter.cs" t="Include" />
-                    <e p="CameraAnimationController.cs" t="Include" />
-                    <e p="CameraController.cs" t="Include" />
-                    <e p="CameraFollowAndMove.cs" t="Include" />
-                    <e p="CameraMovementController.cs" t="Include" />
-                    <e p="CameraPathFollower.cs" t="Include" />
-                    <e p="COMController.cs" t="Include" />
-                    <e p="CoMDisplacement.cs" t="Include" />
-                    <e p="DecryptAssetBundle.cs" t="Include" />
-                    <e p="DHTools.cs" t="Include" />
-                    <e p="DistanceTool.cs" t="Include" />
-                    <e p="Dreamteck" t="Include">
-                      <e p="Splines" t="Include">
-                        <e p="Components" t="Include">
-                          <e p="BlankUser.cs" t="Include" />
-                          <e p="EdgeColliderGenerator.cs" t="Include" />
-                          <e p="Editor" t="Include">
-                            <e p="BakeMeshWindow.cs" t="Include" />
-                            <e p="ExtrudeMeshEditor.cs" t="Include" />
-                            <e p="LengthCalculatorEditor.cs" t="Include" />
-                            <e p="MeshGenEditor.cs" t="Include" />
-                            <e p="NodeEditor.cs" t="Include" />
-                            <e p="ObjectBenderEditor.cs" t="Include" />
-                            <e p="ObjectControllerEditor.cs" t="Include" />
-                            <e p="ParticleControllerEditor.cs" t="Include" />
-                            <e p="PathGeneratorEditor.cs" t="Include" />
-                            <e p="PolygonColliderGenEditor.cs" t="Include" />
-                            <e p="SplineFollowerEditor.cs" t="Include" />
-                            <e p="SplineMeshEditor.cs" t="Include" />
-                            <e p="SplinePositionerEditor.cs" t="Include" />
-                            <e p="SplineProjectorEditor.cs" t="Include" />
-                            <e p="SplineRendererEditor.cs" t="Include" />
-                            <e p="SplineTracerEditor.cs" t="Include" />
-                            <e p="SplineUserEditor.cs" t="Include" />
-                            <e p="SplineUserSubEditor.cs" t="Include" />
-                            <e p="SurfaceGeneratorEditor.cs" t="Include" />
-                            <e p="TubeGeneratorEditor.cs" t="Include" />
-                            <e p="WaveformGeneratorEditor.cs" t="Include" />
-                          </e>
-                          <e p="ExtrudeMesh.cs" t="Include" />
-                          <e p="LengthCalculator.cs" t="Include" />
-                          <e p="MeshGenerator.cs" t="Include" />
-                          <e p="Node.cs" t="Include" />
-                          <e p="ObjectBender.cs" t="Include" />
-                          <e p="ObjectController.cs" t="Include" />
-                          <e p="ParticleController.cs" t="Include" />
-                          <e p="PathGenerator.cs" t="Include" />
-                          <e p="PolygonColliderGenerator.cs" t="Include" />
-                          <e p="SplineComputer.cs" t="Include" />
-                          <e p="SplineFollower.cs" t="Include" />
-                          <e p="SplineMesh.cs" t="Include" />
-                          <e p="SplinePositioner.cs" t="Include" />
-                          <e p="SplineProjector.cs" t="Include" />
-                          <e p="SplineRenderer.cs" t="Include" />
-                          <e p="SplineTracer.cs" t="Include" />
-                          <e p="SplineUser.cs" t="Include" />
-                          <e p="SurfaceGenerator.cs" t="Include" />
-                          <e p="TubeGenerator.cs" t="Include" />
-                          <e p="WaveformGenerator.cs" t="Include" />
-                        </e>
-                        <e p="Core" t="Include">
-                          <e p="CustomOffsetModule.cs" t="Include" />
-                          <e p="CustomRotationModule.cs" t="Include" />
-                          <e p="IO" t="Include">
-                            <e p="CSV.cs" t="Include" />
-                            <e p="SplineParser.cs" t="Include" />
-                            <e p="SVG.cs" t="Include" />
-                          </e>
-                          <e p="Morph.cs" t="Include" />
-                          <e p="ObjectSequence.cs" t="Include" />
-                          <e p="Primitives" t="Include">
-                            <e p="Capsule.cs" t="Include" />
-                            <e p="Ellipse.cs" t="Include" />
-                            <e p="Line.cs" t="Include" />
-                            <e p="Ngon.cs" t="Include" />
-                            <e p="Rectangle.cs" t="Include" />
-                            <e p="RoundedRectangle.cs" t="Include" />
-                            <e p="Spiral.cs" t="Include" />
-                            <e p="SplinePrimitive.cs" t="Include" />
-                            <e p="Star.cs" t="Include" />
-                          </e>
-                          <e p="Spline.cs" t="Include" />
-                          <e p="SplineAddress.cs" t="Include" />
-                          <e p="SplinePoint.cs" t="Include" />
-                          <e p="SplinePrefs.cs" t="Include" />
-                          <e p="SplineResult.cs" t="Include" />
-                          <e p="SplineTrigger.cs" t="Include" />
-                          <e p="TransformModule.cs" t="Include" />
-                        </e>
-                        <e p="Editor" t="Include">
-                          <e p="Changelog.txt" t="Include" />
-                          <e p="CustomOffsetModuleEditor.cs" t="Include" />
-                          <e p="CustomRotationModuleEditor.cs" t="Include" />
-                          <e p="GUI" t="Include">
-                            <e p="GUIObject.cs" t="Include" />
-                            <e p="PointSelector.cs" t="Include" />
-                          </e>
-                          <e p="MorphWindow.cs" t="Include" />
-                          <e p="PathWindow.cs" t="Include" />
-                          <e p="PointTransformer.cs" t="Include" />
-                          <e p="PresetsWindow.cs" t="Include" />
-                          <e p="Primitives" t="Include">
-                            <e p="CapsuleEditor.cs" t="Include" />
-                            <e p="EllipseEditor.cs" t="Include" />
-                            <e p="LineEditor.cs" t="Include" />
-                            <e p="NgonEditor.cs" t="Include" />
-                            <e p="PrimitiveEditor.cs" t="Include" />
-                            <e p="RectangleEditor.cs" t="Include" />
-                            <e p="RoundedRectangleEditor.cs" t="Include" />
-                            <e p="SpiralEditor.cs" t="Include" />
-                            <e p="StarEditor.cs" t="Include" />
-                          </e>
-                          <e p="RelaxWindow.cs" t="Include" />
-                          <e p="SplineComputerMergeEditor.cs" t="Include" />
-                          <e p="SplineComputerSplitEditor.cs" t="Include" />
-                          <e p="SplineDrawer.cs" t="Include" />
-                          <e p="SplineEditor.cs" t="Include" />
-                          <e p="SplineEditorGUI.cs" t="Include" />
-                          <e p="SplineEditorHandles.cs" t="Include" />
-                          <e p="SplineEditorToolbar.cs" t="Include" />
-                          <e p="SplineEditorWindow.cs" t="Include" />
-                          <e p="SplinePointDefaultEditor.cs" t="Include" />
-                          <e p="SplinePointEditor.cs" t="Include" />
-                          <e p="SplinePointMirrorEditor.cs" t="Include" />
-                          <e p="SplinePointNormalEditor.cs" t="Include" />
-                          <e p="SplinePointPositionEditor.cs" t="Include" />
-                          <e p="SplinePointRotationEditor.cs" t="Include" />
-                          <e p="SplinePointScaleEditor.cs" t="Include" />
-                          <e p="SplinePreset.cs" t="Include" />
-                          <e p="Tools" t="Include">
-                            <e p="BakeTool.cs" t="Include" />
-                            <e p="Explorer.cs" t="Include" />
-                            <e p="FindDerivedClasses.cs" t="Include" />
-                            <e p="ImportTool.cs" t="Include" />
-                            <e p="LevelTerrainTool.cs" t="Include" />
-                            <e p="ObjectSpawnTool.cs" t="Include" />
-                            <e p="SplineTool.cs" t="Include" />
-                            <e p="SplineToolsWindow.cs" t="Include" />
-                            <e p="UpdateTool.cs" t="Include" />
-                          </e>
-                          <e p="TransformModuleEditor.cs" t="Include" />
-                          <e p="WelcomeScreen.cs" t="Include" />
-                        </e>
-                      </e>
-                      <e p="Utilities" t="Include">
-                        <e p="DMath.cs" t="Include" />
-                        <e p="Editor" t="Include">
-                          <e p="AudioUtility.cs" t="Include" />
-                          <e p="WelcomeWindow.cs" t="Include" />
-                        </e>
-                        <e p="ImageDB.cs" t="Include" />
-                        <e p="LinearAlgebraUtility.cs" t="Include" />
-                        <e p="MeshUtility.cs" t="Include" />
-                        <e p="ResourceUtility.cs" t="Include" />
-                        <e p="TS_Bounds.cs" t="Include" />
-                        <e p="TS_Mesh.cs" t="Include" />
-                        <e p="TS_Transform.cs" t="Include" />
-                      </e>
-                    </e>
-                    <e p="ExtendStateEvents.cs" t="Include" />
-                    <e p="FaceCamera.cs" t="Include" />
-                    <e p="FixFirstSelected.cs" t="Include" />
-                    <e p="ForeGrounder.cs" t="Include" />
-                    <e p="FSMHelper" t="Include">
-                      <e p="BaseFSMState.cs" t="Include" />
-                      <e p="FSMStateInterface.cs" t="Include" />
-                      <e p="FSMStateMachine.cs" t="Include" />
-                      <e p="FSMStateMachineLogic.cs" t="Include" />
-                      <e p="FSMStateType.cs" t="Include" />
-                    </e>
-                    <e p="HeadIK.cs" t="Include" />
-                    <e p="HonduneMapTester.cs" t="Include" />
-                    <e p="IKController.cs" t="Include" />
-                    <e p="ImpactStateEvents.cs" t="Include" />
-                    <e p="InputController.cs" t="Include" />
-                    <e p="InputFilter.cs" t="Include" />
-                    <e p="InputThread.cs" t="Include" />
-                    <e p="LeanTween" t="Include">
-                      <e p="CanvasAlphaTween.cs" t="Include" />
-                      <e p="Editor" t="Include">
-                        <e p="LeanTweenDocumentationEditor.cs" t="Include" />
-                      </e>
-                      <e p="Examples" t="Include">
-                        <e p="Archived" t="Include">
-                          <e p="2dUnlitWithFade.shader" t="Include" />
-                          <e p="OldGUIExamplesCS.cs" t="Include" />
-                          <e p="TestingPunch.cs" t="Include" />
-                          <e p="TestingRigidbodyCS.cs" t="Include" />
-                        </e>
-                        <e p="Scripts" t="Include">
-                          <e p="Following.cs" t="Include" />
-                          <e p="GeneralAdvancedTechniques.cs" t="Include" />
-                          <e p="GeneralBasic.cs" t="Include" />
-                          <e p="GeneralBasics2d.cs" t="Include" />
-                          <e p="GeneralCameraShake.cs" t="Include" />
-                          <e p="GeneralEasingTypes.cs" t="Include" />
-                          <e p="GeneralEventsListeners.cs" t="Include" />
-                          <e p="GeneralSequencer.cs" t="Include" />
-                          <e p="GeneralSimpleUI.cs" t="Include" />
-                          <e p="GeneralUISpace.cs" t="Include" />
-                          <e p="LogoCinematic.cs" t="Include" />
-                          <e p="PathBezier.cs" t="Include" />
-                          <e p="PathBezier2d.cs" t="Include" />
-                          <e p="PathSpline.cs" t="Include" />
-                          <e p="PathSpline2d.cs" t="Include" />
-                          <e p="PathSplineEndless.cs" t="Include" />
-                          <e p="PathSplinePerformance.cs" t="Include" />
-                          <e p="PathSplines.cs" t="Include" />
-                          <e p="PathSplineTrack.cs" t="Include" />
-                          <e p="TestingUnitTests.cs" t="Include" />
-                          <e p="TestingZLegacy.cs" t="Include" />
-                          <e p="TestingZLegacyExt.cs" t="Include" />
-                        </e>
-                      </e>
-                      <e p="Framework" t="Include">
-                        <e p="LeanAudio.cs" t="Include" />
-                        <e p="LeanSmooth.cs" t="Include" />
-                        <e p="LeanTest.cs" t="Include" />
-                        <e p="LeanTween.cs" t="Include" />
-                        <e p="LeanTweenExt.cs" t="Include" />
-                        <e p="LTDescr.cs" t="Include" />
-                        <e p="LTDescrOptional.cs" t="Include" />
-                        <e p="LTSeq.cs" t="Include" />
-                      </e>
-                      <e p="LICENSE.txt" t="Include" />
-                      <e p="ReadMe.txt" t="Include" />
-                    </e>
-                    <e p="Mathd.cs" t="Include" />
-                    <e p="Misc" t="Include">
-                      <e p="Dbg.cs" t="Include" />
-                      <e p="DebugUI.cs" t="Include" />
-                    </e>
-                    <e p="MusicController.cs" t="Include" />
-                    <e p="PopStateEvents.cs" t="Include" />
-                    <e p="PromptCatch.cs" t="Include" />
-                    <e p="PromptController.cs" t="Include" />
-                    <e p="ReleasedStateEvents.cs" t="Include" />
-                    <e p="Respawn.cs" t="Include" />
-                    <e p="SettingsManager.cs" t="Include" />
-                    <e p="SetupStateEvents.cs" t="Include" />
-                    <e p="ShowcaseMovement.cs" t="Include" />
-                    <e p="SkaterController.cs" t="Include" />
-                    <e p="SoundManager.cs" t="Include" />
-                    <e p="SteezeStateEvents.cs" t="Include" />
-                    <e p="StickInput.cs" t="Include" />
-                    <e p="SurveySelectedChangeColor.cs" t="Include" />
-                    <e p="Testing240.cs" t="Include" />
-                    <e p="Trajectory.cs" t="Include" />
-                    <e p="TriggerManager.cs" t="Include" />
-                    <e p="TurnOffTimer.cs" t="Include" />
-                    <e p="TutorialControllerUI.cs" t="Include" />
-                    <e p="TutTrickTextRotator.cs" t="Include" />
-                    <e p="UISelectedChangeColor.cs" t="Include" />
-                    <e p="VacuumBreather" t="Include">
-                      <e p="ControlledObject.cs" t="Include" />
-                      <e p="PidController.cs" t="Include" />
-                      <e p="PidQuaternionController.cs" t="Include" />
-                      <e p="PidVector3Controller.cs" t="Include" />
-                      <e p="QuaternionExtensions.cs" t="Include" />
-                      <e p="SampleScript.cs" t="Include" />
-                    </e>
-                    <e p="XInputDotNet" t="Include">
-                      <e p="Docs.txt" t="Include" />
-                      <e p="Examples" t="Include">
-                        <e p="XInputTestCS.cs" t="Include" />
-                      </e>
-                      <e p="MITLicense.txt" t="Include" />
-                    </e>
                   </e>
                   <e p="Skateboard" t="Include">
                     <e p="ExtensionMethods.cs" t="Include" />
@@ -614,12 +312,15 @@
                     </e>
                   </e>
                 </e>
-                <e p="Custom Attributes" t="Include">
-                  <e p="Dial.cs" t="Include" />
-                  <e p="PageSlider.cs" t="Include" />
-                  <e p="TagAttribute.cs" t="Include" />
+                <e p="Custom Types" t="Include">
+                  <e p="UI" t="Include">
+                    <e p="LayoutGroups" t="Include">
+                      <e p="RadialLayoutGroup.cs" t="Include" />
+                    </e>
+                    <e p="UIExtensions.cs" t="Include" />
+                  </e>
+                  <e p="UUID.cs" t="Include" />
                 </e>
-                <e p="DelayedInvoker.cs" t="Include" />
                 <e p="Extensions" t="Include">
                   <e p="BehaviourExtensions.cs" t="Include" />
                   <e p="Constants.cs" t="Include" />
@@ -661,33 +362,30 @@
                   </e>
                 </e>
                 <e p="Helpers" t="Include">
+                  <e p="CheckIfObjectIsPrefab.cs" t="Include" />
+                  <e p="DelayedInvoker.cs" t="Include" />
+                  <e p="IO" t="Include">
+                    <e p="CSVReader.cs" t="Include" />
+                    <e p="SimpleAESEncryption.cs" t="Include" />
+                    <e p="XMLReader.cs" t="Include" />
+                  </e>
+                  <e p="OpenInFileBrowser.cs" t="Include" />
                   <e p="SuvatHelper.cs" t="Include" />
                 </e>
-                <e p="IO" t="Include">
-                  <e p="CSVReader.cs" t="Include" />
-                  <e p="SimpleAESEncryption.cs" t="Include" />
-                  <e p="XMLReader.cs" t="Include" />
-                </e>
-                <e p="MemorizedScriptableObject.cs" t="Include" />
                 <e p="Multitons" t="Include">
                   <e p="IndexedMultiton.cs" t="Include" />
                   <e p="Multiton.cs" t="Include" />
                   <e p="PersistentMultiton.cs" t="Include" />
+                  <e p="Test" t="Include">
+                    <e p="IndexedMultitonTest.cs" t="Include" />
+                  </e>
+                  <e p="UUIDMultiton.cs" t="Include" />
                 </e>
-                <e p="Obscurable.cs" t="Include" />
-                <e p="OpenInFileBrowser.cs" t="Include" />
                 <e p="Singletons" t="Include">
                   <e p="EnsuredPersistentSingleton.cs" t="Include" />
                   <e p="EnsuredSingleton.cs" t="Include" />
                   <e p="PersistentSingleton.cs" t="Include" />
                   <e p="Singleton.cs" t="Include" />
-                  <e p="SpawnedSingleton.cs" t="Include" />
-                </e>
-                <e p="UI" t="Include">
-                  <e p="LayoutGroups" t="Include">
-                    <e p="RadialLayoutGroup.cs" t="Include" />
-                  </e>
-                  <e p="UIExtensions.cs" t="Include" />
                 </e>
               </e>
             </e>
@@ -736,6 +434,10 @@
                 </e>
               </e>
               <e p="PlayerSystems" t="Include">
+                <e p="Camera" t="Include">
+                  <e p="CameraFollowPoint.cs" t="Include" />
+                  <e p="CameraSystem.cs" t="Include" />
+                </e>
                 <e p="Movement" t="Include">
                   <e p="[Base]" t="Include">
                     <e p="Custom Types.cs" t="Include" />
@@ -761,6 +463,7 @@
                   </e>
                   <e p="Physics" t="Include">
                     <e p="Acceleration.cs" t="Include" />
+                    <e p="ArealGravity.cs" t="Include" />
                     <e p="CenterOfMass.cs" t="Include" />
                     <e p="ColliderData.cs" t="Include" />
                     <e p="Drag.cs" t="Include" />
@@ -2524,78 +2227,6 @@
                   <e p="Windows" t="Include">
                     <e p="RainbowFoldersPopup.cs" t="Include" />
                     <e p="RainbowFoldersWelcome.cs" t="Include" />
-                  </e>
-                </e>
-              </e>
-            </e>
-          </e>
-          <e p="Rewired" t="Include">
-            <e p="Documentation" t="Include">
-              <e p="licences.txt" t="Include" />
-              <e p="ReadMe.txt" t="Include" />
-              <e p="ReleaseNotes.txt" t="Include" />
-            </e>
-            <e p="Examples" t="Include">
-              <e p="ControlRemapping1" t="Include">
-                <e p="Scripts" t="Include">
-                  <e p="ControlRemappingDemo1.cs" t="Include" />
-                </e>
-              </e>
-              <e p="Shared" t="Include">
-                <e p="Scripts" t="Include">
-                  <e p="Bullet.cs" t="Include" />
-                </e>
-              </e>
-              <e p="SimpleCombinedKeyboardMouseRemapping" t="Include">
-                <e p="Scripts" t="Include">
-                  <e p="SimpleCombinedKeyboardMouseRemapping.cs" t="Include" />
-                </e>
-              </e>
-              <e p="SimpleControlRemapping" t="Include">
-                <e p="Scripts" t="Include">
-                  <e p="SimpleControlRemapping.cs" t="Include" />
-                </e>
-              </e>
-            </e>
-            <e p="Integration" t="Include">
-              <e p="UnityUI" t="Include">
-                <e p="Editor" t="Include">
-                  <e p="RewiredStandaloneInputModuleInspector.cs" t="Include" />
-                </e>
-                <e p="PlayerPointerEventData.cs" t="Include" />
-                <e p="RewiredPointerInputModule.cs" t="Include" />
-                <e p="RewiredStandaloneInputModule.cs" t="Include" />
-              </e>
-            </e>
-            <e p="Internal" t="Include">
-              <e p="Scripts" t="Include">
-                <e p="ControllerTemplates" t="Include">
-                  <e p="ControllerTemplates.cs" t="Include" />
-                </e>
-                <e p="DataStorage" t="Include">
-                  <e p="UserDataStore_PlayerPrefs.cs" t="Include" />
-                </e>
-                <e p="Editor" t="Include">
-                  <e p="CustomInspectors" t="Include">
-                    <e p="ControllerDataFilesInspector.cs" t="Include" />
-                    <e p="CustomInspector_External.cs" t="Include" />
-                    <e p="HardwareJoystickMapInspector.cs" t="Include" />
-                    <e p="HardwareJoystickTemplateMapInspector.cs" t="Include" />
-                    <e p="InitializerInspector.cs" t="Include" />
-                    <e p="InputManagerInspector.cs" t="Include" />
-                    <e p="PlayerControllerInspector.cs" t="Include" />
-                    <e p="PlayerMouseInspector.cs" t="Include" />
-                    <e p="UserDataStore_PlayerPrefsInspector.cs" t="Include" />
-                  </e>
-                  <e p="UnityEditorBridge.cs" t="Include" />
-                </e>
-                <e p="InputManager.cs" t="Include" />
-                <e p="Misc" t="Include">
-                  <e p="ExternalTools.cs" t="Include" />
-                </e>
-                <e p="Platforms" t="Include">
-                  <e p="Ouya" t="Include">
-                    <e p="OuyaInputSource.cs" t="Include" />
                   </e>
                 </e>
               </e>

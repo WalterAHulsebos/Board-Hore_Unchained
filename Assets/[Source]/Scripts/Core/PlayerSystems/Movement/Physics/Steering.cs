@@ -15,7 +15,10 @@ namespace Core.PlayerSystems.Movement
 
         [SerializeField] private float
             maxSteeringAngle = 35,
-            minSteeringAngle = 20;
+            minSteeringAngle = 20,
+            
+            steeringTime = 0.02f,
+            angleIncrease = 0.05f;
         
         private WheelsData _wheelsData;
 
@@ -60,14 +63,14 @@ namespace Core.PlayerSystems.Movement
 
             float __velocity = transform.InverseTransformDirection(this.GetComponent<Rigidbody>().velocity).z;
             
-            _smoothedSteeringInput = Mathf.SmoothDamp(_smoothedSteeringInput, _steeringInput, ref _steeringVelocity, 0.12f);
+            _smoothedSteeringInput = Mathf.SmoothDamp(_smoothedSteeringInput, _steeringInput, ref _steeringVelocity, steeringTime);
             
             foreach(Wheel __wheel in _wheelsData.wheels)
             {
                 if(__wheel.steer)
                 {
                     __wheel.wheelController.steerAngle =
-                        Mathf.Lerp(a: maxSteeringAngle, b: minSteeringAngle, t: __velocity.Abs() * 0.05f) * _smoothedSteeringInput;
+                        Mathf.Lerp(a: maxSteeringAngle, b: minSteeringAngle, t: __velocity.Abs() * angleIncrease) * _smoothedSteeringInput;
                 }
             }
         }

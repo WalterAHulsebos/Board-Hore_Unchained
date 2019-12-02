@@ -16,12 +16,13 @@ namespace Core.PlayerSystems.Movement
             linearDrag = 0.1f,
             freeWheelDrag = 1f,
             brakingDrag = 2f,
+            aerialDrag = 0.5f,
             angularDrag = 3f;
         
-        [SerializeField] private bool 
-            linearDragCheck = true,
-            brakingDragCheck = false,
-            freeWheelDragCheck = true;
+        private bool 
+            linearDragCheck,
+            brakingDragCheck,
+            freeWheelDragCheck;
 
         #endregion
 
@@ -46,19 +47,22 @@ namespace Core.PlayerSystems.Movement
 
         private void UpdateDrag(Rigidbody rb, bool grounded, PlayerInputs input, VehicleSpeed speedData)
         {
-            linearDragCheck = input.accelerationInput.Abs() < 0.05 || grounded;
-            float __linearDragToAdd = linearDragCheck ? linearDrag : 0;
-
+            float __combinedDrag = 0f;
             
+            linearDragCheck = (input.accelerationInput.Abs() < 0.05) || grounded;
+            
+            //If We're braking
             brakingDragCheck = (input.accelerationInput < 0) && speedData.forwardSpeed > 0;
-            float __brakingDragToAdd = brakingDragCheck ? brakingDrag : 0;
             
-
+            //If not giving any input.
             freeWheelDragCheck = input.accelerationInput.Abs() < 0.02f && grounded;
-            float __freeWheelDragToAdd = freeWheelDragCheck ? freeWheelDrag : 0;
             
+            __combinedDrag += linearDragCheck ? linearDrag : 0;
+            __combinedDrag += brakingDragCheck ? brakingDrag : 0;
+            __combinedDrag += freeWheelDragCheck ? freeWheelDrag : 0;
+            __combinedDrag += !grounded ? aerialDrag : 0;
 
-            rb.drag = __linearDragToAdd + __brakingDragToAdd + __freeWheelDragToAdd;
+            rb.drag = __combinedDrag;
         }
         
         #endregion
