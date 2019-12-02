@@ -5311,7 +5311,7 @@ GameObject:
   - component: {fileID: 6730920589478937759}
   - component: {fileID: 6730920589478937756}
   - component: {fileID: 6730920589478937757}
-  - component: {fileID: 6730920589478937746}
+  - component: {fileID: 552211317088299661}
   m_Layer: 10
   m_Name: Physics
   m_TagString: Untagged
@@ -5345,7 +5345,7 @@ Rigidbody:
   m_GameObject: {fileID: 6730920589478937744}
   serializedVersion: 2
   m_Mass: 1000
-  m_Drag: 0.15
+  m_Drag: 0.5
   m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -5491,7 +5491,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _vehicle: {fileID: 6730920590304203205}
-  maxMotorTorque: 1500
+  maxMotorTorque: 1750
   maxBrakeTorque: 900
   velocity: 0
 --- !u!114 &6730920589478937752
@@ -5516,8 +5516,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _vehicle: {fileID: 6730920590304203205}
-  maxSteeringAngle: 35
-  minSteeringAngle: 20
+  maxSteeringAngle: 50
+  minSteeringAngle: 10
+  steeringTime: 0.02
+  angleIncrease: 0.05
 --- !u!114 &6730920589478937753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5563,12 +5565,10 @@ MonoBehaviour:
     SerializationNodes: []
   _vehicle: {fileID: 6730920590304203205}
   linearDrag: 0.1
-  freeWheelDrag: 1
+  freeWheelDrag: 0.2
   brakingDrag: 2
-  angularDrag: 3
-  linearDragCheck: 1
-  brakingDragCheck: 0
-  freeWheelDragCheck: 1
+  aerialDrag: 0.5
+  angularDrag: 1
 --- !u!114 &6730920589478937759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5576,7 +5576,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6730920589478937744}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c98648725d0e1a34daddf713ea7b77f4, type: 3}
   m_Name: 
@@ -5675,9 +5675,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _vehicle: {fileID: 6730920590304203205}
-  centerOfMassOffset: {x: 0, y: -0.45, z: 0}
+  centerOfMassOffset: {x: 0, y: -0.25, z: -0.05}
   showDebug: 1
---- !u!114 &6730920589478937746
+--- !u!114 &552211317088299661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5686,38 +5686,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6730920589478937744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Script: {fileID: 11500000, guid: c5223f21132289d4588353d20bee9b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ImpulseDefinition:
-    m_ImpulseChannel: 1
-    m_RawSignal: {fileID: 11400000, guid: 46965f9cbaf525742a6da4c2172a99cd, type: 2}
-    m_AmplitudeGain: 0.5
-    m_FrequencyGain: 3
-    m_RepeatMode: 0
-    m_Randomize: 1
-    m_TimeEnvelope:
-      m_AttackShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_DecayShape:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      m_AttackTime: 0
-      m_SustainTime: 0.2
-      m_DecayTime: 0.3
-      m_ScaleWithImpact: 1
-      m_HoldForever: 0
-    m_ImpactRadius: 100
-    m_DirectionMode: 0
-    m_DissipationMode: 2
-    m_DissipationDistance: 1000
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _vehicle: {fileID: 6730920590304203205}
+  airGravityMultiplier: 1.5
 --- !u!1 &6730920589496855290
 GameObject:
   m_ObjectHideFlags: 0
@@ -8026,7 +8008,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6730920590541711614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.001, y: 0.293, z: 1.383}
+  m_LocalPosition: {x: 0.001, y: 0.37, z: 1.383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6730920590218785594}

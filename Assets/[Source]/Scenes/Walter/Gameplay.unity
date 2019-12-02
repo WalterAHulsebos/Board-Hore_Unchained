@@ -194,11 +194,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6730920590304203205, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
-    - target: {fileID: 6730920589478937747, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: m_Drag
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6730920589478937733, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -215,32 +210,14 @@ PrefabInstance:
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730920589478937755, guid: 03b4179c461b64e4c9a11664a206d0d6,
+      objectReference: {fileID: 6730920589478937755, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
-      propertyPath: maxMotorTorque
-      value: 1750
-      objectReference: {fileID: 0}
     - target: {fileID: 6730920589478937752, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730920589478937752, guid: 03b4179c461b64e4c9a11664a206d0d6,
+      objectReference: {fileID: 6730920589478937752, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
-      propertyPath: maxSteeringAngle
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730920589478937752, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: minSteeringAngle
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730920589478937752, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: steeringTime
-      value: 0.02
-      objectReference: {fileID: 0}
     - target: {fileID: 6730920589478937753, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -253,42 +230,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6730920589478937758, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
-    - target: {fileID: 6730920589478937758, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: linearDrag
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730920589478937758, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: freeWheelDrag
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730920589478937758, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: brakingDragCheck
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730920589478937758, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: arialDrag
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730920589478937758, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: angularDrag
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6730920589478937759, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 6730920589478937759, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
-    - target: {fileID: 6730920589478937759, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6730920589478937756, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -301,16 +248,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6730920589478937757, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
-    - target: {fileID: 6730920589478937757, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: centerOfMassOffset.y
-      value: -0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6730920589478937757, guid: 03b4179c461b64e4c9a11664a206d0d6,
-        type: 3}
-      propertyPath: centerOfMassOffset.z
-      value: -0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 6730920588808343510, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
       propertyPath: serializationData.Prefab
@@ -359,10 +296,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6730920589952484950, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
-    - target: {fileID: 6730920590541711609, guid: 03b4179c461b64e4c9a11664a206d0d6,
+    - target: {fileID: 552211317088299661, guid: 03b4179c461b64e4c9a11664a206d0d6,
         type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.37
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 552211317088299661, guid: 03b4179c461b64e4c9a11664a206d0d6,
+        type: 3}
+      propertyPath: airGravityMultiplier
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03b4179c461b64e4c9a11664a206d0d6, type: 3}
