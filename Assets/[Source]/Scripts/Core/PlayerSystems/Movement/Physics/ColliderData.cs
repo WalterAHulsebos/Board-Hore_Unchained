@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+
+using JetBrains.Annotations;
 
 namespace Core.PlayerSystems.Movement
 {
     public class ColliderData : VehicleBehaviour
     {
+        [PublicAPI]
         public static event Action<Collision> EOnCollision = collisionPosition => { };
         
         private void OnCollisionEnter(Collision other)

@@ -21,7 +21,7 @@ namespace Core.PlayerSystems.Movement.Abilities
             _currentDriftTime;
         
         private bool 
-            _wannaDrift,
+            _driftInput,
             _isDrifting;
 
         private LateralFriction _lateralFriction;
@@ -29,51 +29,43 @@ namespace Core.PlayerSystems.Movement.Abilities
         #endregion
 
         #region Methods
-        
+
+        #region Unity Event Functions
+
         private void Awake()
         {
-            /*
-            abilityAction.performed +=
-                ctx => 
-                {
-                    if (ctx.interaction is SlowTapInteraction)
-                    {
-                        _wannaDrift = true;
-                    }
-                };
-                */
-            
             abilityAction.started +=
                 ctx =>
                 {
-                    _wannaDrift = true;
+                    _driftInput = true;
                 };
             abilityAction.canceled +=
                 ctx =>
                 {
-                    _wannaDrift = false;
+                    _driftInput = false;
                 };
         }
 
-        protected override void Start()
+        public override void Initialize()
         {
-            base.Start();
-            
-            _lateralFriction = GetComponentInChildren<LateralFriction>();
+            _lateralFriction = _vehicle.GetComponentInChildren<LateralFriction>();
         }
 
-        private void Update()
+        #endregion
+
+        public override void AbilityUpdate()
         {
+            base.AbilityUpdate();
+            
             if(!_vehicle.mayMove) return;
 
             CheckInput();
-            UpdateAbility();
-            //DoAbility();
+            Drift();
         }
 
-        public override void CheckInput()
+        public void CheckInput()
         {
-            if (_wannaDrift && _vehicle.wheelData.grounded)
+            if (_driftInput && _vehicle.wheelsData.anyGrounded)
             {
                 _isDrifting = true;
             }
@@ -83,7 +75,7 @@ namespace Core.PlayerSystems.Movement.Abilities
             }
         }
 
-        private void UpdateAbility()
+        private void Drift()
         {
             if (_isDrifting)
             {
@@ -107,7 +99,7 @@ namespace Core.PlayerSystems.Movement.Abilities
 
             if (__belowBaseTireStickiness &&
                 !_isDrifting &&
-                _vehicle.wheelData.grounded
+                _vehicle.wheelsData.anyGrounded
             )
             {
                 //This is to try recover some lost speed while drifting

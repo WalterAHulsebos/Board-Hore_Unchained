@@ -1,6 +1,4 @@
-﻿//using System;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using UnityEngine;
 
@@ -11,6 +9,7 @@ using JetBrains.Annotations;
 namespace CommonGames.Utilities.CGTK.CGPooling
 {
 	/// <summary>This class handles the association between a spawned prefab, and the GameObjectPool component that manages it.</summary>
+	// ReSharper disable once InconsistentNaming
 	public static class CGPool
 	{
 		public const string COMPONENT_PATH_PREFIX = "CGTK/CGPooling/";
@@ -23,7 +22,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		
 		/// <summary>This allows you to spawn a prefab via Component.</summary>
 		public static T Spawn<T>(T prefab) where T : Component
-			=> Spawn(prefab, Vector3.zero, Quaternion.identity);
+			=> Spawn(prefab: prefab, position: Vector3.zero, rotation: Quaternion.identity);
 
 		/// <summary>This allows you to spawn a prefab via Component.</summary>
 		[PublicAPI]
@@ -32,7 +31,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		{
 			// Clone this prefab's GameObject
 			GameObject __gameObject = prefab != null ? prefab.gameObject : null;
-			GameObject __clone = Spawn(__gameObject, position, rotation, parent);
+			GameObject __clone = Spawn(prefab: __gameObject, position: position, rotation: rotation, parent: parent);
 
 			// Return the same component from the clone
 			return __clone != null ? __clone.GetComponent<T>() : null;
@@ -41,25 +40,25 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		/// <summary>This allows you to spawn a prefab via GameObject.</summary>
 		[PublicAPI]
 		public static GameObject Spawn(GameObject prefab)
-			=> Spawn(prefab, Vector3.zero, Quaternion.identity, null);
+			=> Spawn(prefab: prefab, position: Vector3.zero, rotation: Quaternion.identity, null);
 
 		/// <summary>This allows you to spawn a prefab via GameObject.</summary>
 		[PublicAPI]
-		public static GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation)
-			=> Spawn(prefab, position, rotation, null);
+		public static GameObject Spawn(GameObject prefab, in Vector3 position, in Quaternion rotation)
+			=> Spawn(prefab: prefab, position: position, rotation: rotation, null);
 
 		/// <summary>This allows you to spawn a prefab via GameObject.</summary>
 		[PublicAPI]
-		public static GameObject Spawn(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
+		public static GameObject Spawn(GameObject prefab, in Vector3 position, in Quaternion rotation, in Transform parent)
 		{
 			if (prefab != null)
 			{
 				// Find the pool that handles this prefab
 
 				// Create a new pool for this prefab?
-				if (GameObjectPool.TryFindPoolByPrefab(prefab, out GameObjectPool __pool) == false)
+				if (GameObjectPool.TryFindPoolByPrefab(prefab: prefab, foundPool: out GameObjectPool __pool) == false)
 				{
-					__pool = new GameObject("CGPool(" + prefab.name + ")").AddComponent<GameObjectPool>();
+					__pool = new GameObject(name: $"CGPool({prefab.name})").AddComponent<GameObjectPool>();
 
 					__pool.prefab = prefab;
 				}
@@ -67,10 +66,10 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 				// Try and spawn a clone from this pool
 				GameObject __clone = default(GameObject);
 
-				if (__pool.TrySpawn(position, rotation, parent, ref __clone) != true) return null;
+				if (__pool.TrySpawn(position: position, rotation: rotation, parent: parent, clone: ref __clone) != true) return null;
 				
 				// Clone already registered?
-				if (Links.Remove(__clone))
+				if (Links.Remove(key: __clone))
 				{
 					// If this pool recycles clones, then this can be expected
 					if (__pool.Recycle)
@@ -80,17 +79,17 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 					// This shouldn't happen
 					else
 					{
-						CGDebug.LogWarning("You're attempting to spawn a clone that hasn't been despawned. Make sure all your Spawn and Despawn calls match, you shouldn't be manually destroying them!", __clone);
+						CGDebug.LogWarning(message: "You're attempting to spawn a clone that hasn't been despawned. Make sure all your Spawn and Despawn calls match, you shouldn't be manually destroying them!", context: __clone);
 					}
 				}
 
 				// Associate this clone with this pool
-				Links.Add(__clone, __pool);
+				Links.Add(key: __clone, value: __pool);
 
 				return __clone;
 			}
 
-			CGDebug.LogError("Attempting to spawn a null prefab");
+			CGDebug.LogError(message: "Attempting to spawn a null prefab");
 			return null;
 		}
 		
@@ -104,7 +103,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		{
 			for (int __i = GameObjectPool.Instances.Count - 1; __i >= 0; __i--)
 			{
-				GameObjectPool.Instances[__i].DespawnAll();
+				GameObjectPool.Instances[index: __i].DespawnAll();
 			}
 
 			Links.Clear();
@@ -114,9 +113,9 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		[PublicAPI]
 		public static void DespawnAll(GameObject prefab)
 		{
-			if (GameObjectPool.TryFindPoolByPrefab(prefab, out GameObjectPool __pool) == false)
+			if (GameObjectPool.TryFindPoolByPrefab(prefab: prefab, foundPool: out GameObjectPool __pool) == false)
 			{
-				__pool = new GameObject("CGPool(" + prefab.name + ")").AddComponent<GameObjectPool>();
+				__pool = new GameObject(name: "CGPool(" + prefab.name + ")").AddComponent<GameObjectPool>();
 
 				__pool.prefab = prefab;
 			}
@@ -134,7 +133,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 		[PublicAPI]
 		public static void Despawn(Component clone, float delay = 0.0f)
 		{
-			if (clone != null)Despawn(clone.gameObject, delay);
+			if (clone != null)Despawn(clone: clone.gameObject, delay: delay);
 		}
 
 		/// <summary>This allows you to despawn a clone via GameObject, with optional delay.</summary>
@@ -144,22 +143,22 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			if (clone != null)
 			{
 				// Try and find the pool associated with this clone
-				if (Links.TryGetValue(clone, out GameObjectPool __pool))
+				if (Links.TryGetValue(key: clone, value: out GameObjectPool __pool))
 				{
 					// Remove the association
-					Links.Remove(clone);
+					Links.Remove(key: clone);
 
-					__pool.Despawn(clone, delay);
+					__pool.Despawn(clone: clone, t: delay);
 				}
 				else
 				{
-					if (GameObjectPool.TryFindPoolByClone(clone, ref __pool))
+					if (GameObjectPool.TryFindPoolByClone(clone: clone, foundPool: ref __pool))
 					{
-						__pool.Despawn(clone, delay);
+						__pool.Despawn(clone: clone, t: delay);
 					}
 					else
 					{
-						CGDebug.LogWarning("You're attempting to despawn a gameObject that wasn't spawned from this pool", clone);
+						CGDebug.LogWarning(message: "You're attempting to despawn a gameObject that wasn't spawned from this pool", context: clone);
 
 						// Fall back to normal destroying
 						#if UNITY_EDITOR
@@ -172,7 +171,7 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 			}
 			else
 			{
-				CGDebug.LogWarning("You're attempting to despawn a null gameObject", clone);
+				CGDebug.LogWarning(message: "You're attempting to despawn a null gameObject", context: clone);
 			}
 		}
 		

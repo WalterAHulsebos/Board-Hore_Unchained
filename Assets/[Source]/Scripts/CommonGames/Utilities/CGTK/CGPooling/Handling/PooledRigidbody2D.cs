@@ -7,16 +7,24 @@ namespace CommonGames.Utilities.CGTK.CGPooling
 	[AddComponentMenu(CGPool.COMPONENT_PATH_PREFIX + "Pooled Rigidbody2D")]
 	public sealed class PooledRigidbody2D : MonoBehaviour, IPoolable
 	{
+		private Rigidbody2D _rigidbody2D = null;
+
+		private void Start()
+		{
+			_rigidbody2D = GetComponent<Rigidbody2D>();	
+		}
+
 		public void OnSpawn()
 		{
+			if(_rigidbody2D != null) return;
+			
+			_rigidbody2D = GetComponent<Rigidbody2D>();
 		}
 
 		public void OnDespawn()
 		{
-			Rigidbody2D __rigidbody2D = GetComponent<Rigidbody2D>();
-
-			__rigidbody2D.velocity = Vector2.zero;
-			__rigidbody2D.angularVelocity = 0.0f;
+			_rigidbody2D.velocity = Vector2.zero;
+			_rigidbody2D.angularVelocity = 0.0f;
 		}
 	}
 }

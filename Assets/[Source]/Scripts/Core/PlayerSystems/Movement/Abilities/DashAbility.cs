@@ -70,11 +70,9 @@ namespace Core.PlayerSystems.Movement.Abilities
             DoAbility();
         }
 
-        public override void CheckInput() { }
-
         public override void DoAbility()
         {
-            if (!_vehicle.wheelData.grounded) return;
+            if (!_vehicle.wheelsData.anyGrounded) return;
             
             _readyForDash = false;
             

@@ -17,12 +17,10 @@ using CommonGames.Utilities.CGTK;
 
 using JetBrains.Annotations;
 
-using Curve;
+using Core.Environmental.Railings;
 
 namespace Core.PlayerSystems.Movement.Abilities
 {
-    //using Utilities.Extensions;
-
     public class GrindAbility : BaseAbility
     {
         #region Variables
@@ -31,9 +29,14 @@ namespace Core.PlayerSystems.Movement.Abilities
         public TubeGenerator bar;
         
         //public EndOfPathInstruction endOfPathInstruction;
-        [SerializeField] private float speed = 10f, yeetForce = 15f, offsetFromBar = 0.5f;
+        [SerializeField] private float 
+            speed = 17.5f, 
+            bailForce = 175.0f, 
+            bailUpPercentage = 0.2f, 
+            
+            offsetFromBar = 0.5f;
 
-        [ReadOnly]
+        //[ReadOnly]
         // ReSharper disable once InconsistentNaming
         [OdinSerialize] private readonly float CooldownTime = 0.25f;
 
@@ -49,9 +52,10 @@ namespace Core.PlayerSystems.Movement.Abilities
         //for example 10m/s on a bar of 100m would be 0.1/s, because 10 is 10% of 100.
         private float _calculatedSpeed = 0f;
 
-        private bool _readyToYeet = false;
+        private bool _readyToBail = false;
 
-        private float _currentCooldown = 0f;
+        private float
+            _timeOfLastBail = 0f;
 
         #endregion
 
@@ -60,32 +64,23 @@ namespace Core.PlayerSystems.Movement.Abilities
         private void Awake()
         {
             abilityAction.started +=
-                ctx => { _readyToYeet = true; };
+                ctx => { _readyToBail = true; };
             
             abilityAction.canceled +=
-                ctx => { _readyToYeet = false; };
+                ctx => { _readyToBail = false; };
         }
 
-        public override void CheckInput()
-        {
-            
-        }
+        public override void DoAbility() { }
 
-        public override void DoAbility()
+        public override void AbilityUpdate()
         {
-
-        }
-
-        private void Update()
-        {
-            _currentCooldown -= Time.deltaTime;
+            base.AbilityUpdate();
 
             if(!_onGrindBar) return;
             
-            //Debug.Log("Following GrindBar");
-            if(_readyToYeet)
+            if(_readyToBail)
             {
-                YeetFromBar();
+                BailFromBar();
                 return;
             }
             
@@ -95,7 +90,9 @@ namespace Core.PlayerSystems.Movement.Abilities
         [PublicAPI]
         public void AttachToBar(TubeGenerator bar)
         {
-            if(_currentCooldown > 0) return;
+            //If the time since last bail is less than CoolDownTime, return. 
+            float __timeSinceLastBail = (Time.time - _timeOfLastBail).Abs();
+            if(__timeSinceLastBail < CooldownTime) return;
 
             if(_onGrindBar) return;
 
@@ -123,7 +120,7 @@ namespace Core.PlayerSystems.Movement.Abilities
         }
         
         [PublicAPI]
-        public void YeetFromBar()
+        public void BailFromBar()
         {
             _onGrindBar = false;
             
@@ -131,14 +128,14 @@ namespace Core.PlayerSystems.Movement.Abilities
 
             _distanceTravelled = 0f;
 
-            _currentCooldown = CooldownTime;
+            _timeOfLastBail = Time.time;
 
             Rigidbody __rigidbody = _vehicle.rigidbody;
 
             Transform __rigidbodyTransform = __rigidbody.transform;
-            Vector3 __direction = Vector3.SlerpUnclamped(__rigidbodyTransform.forward, __rigidbodyTransform.up * 0.8f, 0.3f);
+            Vector3 __direction = Vector3.SlerpUnclamped(a: __rigidbodyTransform.forward, b: __rigidbodyTransform.up, t: bailUpPercentage);
 
-            __rigidbody.AddForceAtPosition(force: yeetForce * __direction, position: __rigidbody.position, mode: ForceMode.Impulse);
+            __rigidbody.AddForceAtPosition(force: __direction.SetVectorLength(bailForce), position: __rigidbody.worldCenterOfMass, mode: ForceMode.Impulse);
             
             _vehicle.mayMove--;
         }
@@ -165,7 +162,7 @@ namespace Core.PlayerSystems.Movement.Abilities
             if(_distanceTravelled >= __maxPercentage)
             //if(_distanceTravelled >= 1 || _distanceTravelled.Approximately(1))
             {
-                YeetFromBar();
+                BailFromBar();
                 return;
             }
 
@@ -177,19 +174,17 @@ namespace Core.PlayerSystems.Movement.Abilities
 
             __posRelativeToWorld.y += offsetFromBar;
 
-            
-            /*
-            _vehicle.rigidbody.transform.SetPositionAndRotation(
-                position: __posRelativeToWorld, 
-                rotation: Quaternion.LookRotation(__tangentRelativeToBar, Vector3.up));
-                
-            */
-
             _vehicle.rigidbody.transform.position = __posRelativeToWorld;
-            _vehicle.rigidbody.transform.rotation = Quaternion.LookRotation(-__tangentRelativeToBar, Vector3.up);
+            _vehicle.rigidbody.transform.rotation = Quaternion.LookRotation(forward: __tangentRelativeToBar, upwards: Vector3.up);
 
+            /*
+            //_vehicle.rigidbody.transform.SetPositionAndRotation(
+            //position: __posRelativeToWorld, 
+            //rotation: Quaternion.LookRotation(__tangentRelativeToBar, Vector3.up));
+            
             //_vehicle.rigidbody.MovePosition(__posRelativeToWorld);
             //_vehicle.rigidbody.MoveRotation(Quaternion.LookRotation(__tangentRelativeToBar, Vector3.up));
+            */
         }
 
         private void StopSecondaryMovement()
@@ -217,4 +212,5 @@ namespace Core.PlayerSystems.Movement.Abilities
         #endregion
     
     }
+    
 }

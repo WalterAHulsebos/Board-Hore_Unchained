@@ -1,70 +1,126 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+
+using System.Runtime.Serialization;
+
 using System.Linq;
+
 using UnityEngine;
 
+using CommonGames.Utilities.Helpers;
+
+using Sirenix.Serialization;
+
+using JetBrains.Annotations;
+
 #if ODIN_INSPECTOR
+using Sirenix.OdinInspector;
+
 using MonoBehaviour = Sirenix.OdinInspector.SerializedMonoBehaviour;
 #endif
 
+// ReSharper disable ArgumentsStyleOther
+// ReSharper disable once ArgumentsStyleNamedExpression
+// ReSharper disable once CheckNamespace
 namespace CommonGames.Utilities
 {
-    public abstract class Multiton<T> : MonoBehaviour where T : Multiton<T>
+    using Extensions;
+    using Sirenix.Utilities;
+
+    [ExecuteAlways]
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("ReSharper", "ArrangeThisQualifier")]
+    public abstract class Multiton<T> : MonoBehaviour 
+        where T : Multiton<T>
     {
-        protected static int Length;
-
-        ///<summary> Static reference to all the Instances of T</summary>
-        private static Dictionary<Type, object> InstancesDictionary { get; set; } = new Dictionary<Type, object>();
-
-        public static List<T> Instances
+        [PublicAPI]
+        [ShowInInspector]
+        [OdinSerialize]
+        [NonSerialized]
+        [ListDrawerSettings(ShowIndexLabels = true)]
+        public static List<T> Instances = new List<T>();
+        
+        [PublicAPI]
+        public static int IndexFromInstance(T instance) => Instances.IndexOf(instance);
+        
+        private bool _initialized = false;
+        
+        ///<summary> Associate Multiton to its Instance.</summary>
+        private void Initialize()
         {
-            get
-            {
-                InstancesDictionary.TryGetValue(typeof(T), out object __instances);
-                return (List<T>)__instances;
-            }
-            set
-            {
-                InstancesDictionary.TryGetValue(typeof(T), out object __instances);
-                __instances = value;
-            }
+            //Debug.Log("Initialize");
+            if(PrefabCheckHelper.CheckIfPrefab(this)) return;
+            
+            if(_initialized) return;
+            _initialized = true;
+
+            if(Instances.Contains(this)) return;
+
+            Instances.CGAddAtLast(this as T);
         }
         
-        public static int IndexFromInstance(Multiton<T> instance) => InstancesDictionary.Values.ToList().IndexOf(instance);
-
-        ///<summary> Gets whether Instances of this Multiton exist.</summary>
-        public static bool InstanceExists
+        ///<summary> Clear Multiton association.</summary>
+        private void DeInitialize()
         {
-            get
-            {
-                bool __typeExists = InstancesDictionary.TryGetValue(typeof(T), out object __instances);
-
-                if (!__typeExists) return false;
-                
-                return ((List<T>)__instances).Count > 0;
-            }
-        }
-
-        ///<summary> OnEnable method to associate Multiton to their Instance.</summary>
-        protected virtual void OnEnable()
-        {
-            bool __typeExists = InstancesDictionary.TryGetValue(typeof(T), out object instances);
+            //Debug.Log("De-Initialize");
             
-            if (!__typeExists)
+            //if(!Instances.Contains(this)) goto RECALCULATE; 
+            
+            Instances.Remove(this as T);
+
+            this._initialized = false;
+
+            RECALCULATE:
+            RecalculateIndices();
+        }
+        
+        #region Initialization
+        
+        protected virtual void Reset() => Initialize();
+
+        protected virtual void OnValidate() => Initialize();
+
+        //protected virtual void Awake() => Initialize(); // => Initialize();
+        
+        protected virtual void OnEnable() => Initialize(); // => Initialize();
+        
+        #endregion
+
+
+        #region De-Initialization
+
+        protected virtual void OnDisable() => DeInitialize();
+
+        #endregion
+
+        private static bool AllNull = true;
+        
+        /// <summary> Recalculates the Index of every Instance. </summary>
+        protected virtual void RecalculateIndices()
+        {
+            //Is set to false if there's ANY Instance of this Multiton
+            AllNull = true;
+
+            for(int __index = 0; __index < Instances.Count; __index++)
             {
-                instances = new List<T>(Length);
-                InstancesDictionary.Add(typeof(T), instances);
+                T __instance = Instances[__index];
+                
+                Debug.Log($"Index = {__index}, \n Instance is null? = {__instance.SafeIsUnityNull()}");
+
+                if(__instance.SafeIsUnityNull()) continue;
+
+                AllNull = false;
+
+                __instance.Initialize();
             }
 
-            ((List<T>)instances)?.Add((T)this);
+            //TODO: Replace hacky fix...
+            if(!AllNull) return;
+            
+            Debug.Log("RESET!");
+                
+            Instances.Clear();
         }
-
-        ///<summary> OnDisable method to clear Multiton association.</summary>
-        protected virtual void OnDisable()
-        {
-            InstancesDictionary.TryGetValue(typeof(T), out object __instances);
-            ((List<T>)__instances)?.Remove((T)this);
-        }
+        
     }
 }

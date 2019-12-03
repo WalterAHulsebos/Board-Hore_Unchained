@@ -15,27 +15,30 @@ namespace Core.PlayerSystems.Movement
         {
             ApplyLinearStabilityForces(
                 _vehicle.rigidbody,
-                _vehicle.wheelData.physicsWheelPoints,
-                _vehicle.wheelData.grounded,
-                _vehicle.wheelData.numberOfGroundedWheels
+                _vehicle.wheelsData.wheels,
+                _vehicle.wheelsData.anyGrounded,
+                _vehicle.wheelsData.numberOfGroundedWheels
             );
 
             ApplyAngularStabilityForces(
                 _vehicle.rigidbody,
                 _vehicle.averageColliderSurfaceNormal,
-                _vehicle.wheelData.grounded
+                _vehicle.wheelsData.anyGrounded
             );
         }
 
-        private void ApplyLinearStabilityForces(Rigidbody rigidbody, Transform[] physicsWheelPoints, bool grounded,
+        private void ApplyLinearStabilityForces(Rigidbody rigidbody, Wheels.Wheel[] physicsWheelPoints, bool grounded,
             int numberOfGroundedWheels)
         {
             if (!(linearStabilityForce > 0) || !grounded || numberOfGroundedWheels >= 3) return;
             
             Vector3 __downwardForce = linearStabilityForce * Time.fixedDeltaTime * Vector3.down;
-            foreach (Transform __wheel in physicsWheelPoints)
+            
+            foreach (Wheels.Wheel __wheel in physicsWheelPoints)
             {
-                rigidbody.AddForceAtPosition(__downwardForce, __wheel.position, ForceMode.Acceleration);
+                __wheel.wheelController.GetWorldPose(out Vector3 __wheelPosition, out Quaternion __wheelRotation);
+                
+                rigidbody.AddForceAtPosition(__downwardForce, __wheelPosition, ForceMode.Acceleration);
             }
         }
 

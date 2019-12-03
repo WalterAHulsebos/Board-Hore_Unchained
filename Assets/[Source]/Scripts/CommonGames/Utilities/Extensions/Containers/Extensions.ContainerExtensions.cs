@@ -12,8 +12,31 @@ using SRandom = System.Random;
 
 namespace CommonGames.Utilities.Extensions
 {
+    [PublicAPI]
     public static partial class ContainerExtensions
     {
+        /// <summary>
+        /// Gets the count of the items in a list that aren't null/
+        /// </summary>
+        [PublicAPI]
+        public static int CountNonNull<T>(this List<T> list) where T : class
+        {
+            int __normalCount = list.Count;
+            Debug.Log($"Normal Count = {__normalCount}");
+            int __nonNullCount = -1;
+
+            for(int __index = 0; __index < __normalCount; __index++)
+            {
+                T __target = list[__index];
+
+                if(__target != null) __nonNullCount++;
+            }
+            
+            Debug.Log($"Non-Null Count = {list.Count}");
+
+            return __nonNullCount;
+        }
+        
         /// <summary>
         /// Get an item which returns true when overloaded in target function.
         /// </summary>
@@ -190,12 +213,43 @@ namespace CommonGames.Utilities.Extensions
         /// <summary>
         /// Add values of other list to target array that return true when overloaded with target function.
         /// </summary>
-        [PublicAPI]
         public static void CGAdd<T>(this List<T> list, T[] other, Func<T, bool> func)
         {
             foreach (T t in other)
                 if (func(t))
                     list.Add(t);
+        }
+
+        public static void CGAddAtLast<T>(this List<T> list, in T value) where T : class
+        {
+            int __index = list.Count - 1;
+
+            //Debug.Log($"Count = {list.Count}");
+            
+            if(list.Count <= 0) goto  ADD; //If the list is empty, *add* the value.
+
+            //Debug.Log($"index = {__index}");
+            
+            if(!list[__index].Equals(null)) goto ADD; //If the item is empty, *insert* the value. Else, *add* the value.
+
+            //Debug.Log($"Is in fact NULL");
+            
+            list[__index] = value;
+
+            return;
+            
+            ADD:
+            
+            /*
+            if(list.Count > 0)
+            { 
+                Debug.Log($"IndexValue is not null = {!list[__index].Equals(null)}");   
+            }
+            */
+
+            list.Add(item: value);
+            
+            //Debug.Log($"New Count = {list.Count}");
         }
 
         /// <summary>
@@ -277,6 +331,41 @@ namespace CommonGames.Utilities.Extensions
             T item = list.First();
             list.RemoveAt(0);
             return item;
+        }
+        
+        [PublicAPI]
+        public static void Swap<T>
+        (
+            this IList<T> list,
+            in int firstIndex,
+            in int secondIndex
+        ) 
+        {
+            if(list == null)
+            {
+                return;
+            }
+            
+            if(!(firstIndex >= 0 && firstIndex < list.Count))
+            {
+                Debug.LogError("Something went wrong while swapping two instances in a list...");
+                return;
+            }
+            
+            if(!(secondIndex >= 0 && secondIndex < list.Count))
+            {
+                Debug.LogError("Something went wrong while swapping two instances in a list...");
+                return;
+            }
+            
+            if (firstIndex == secondIndex) 
+            {
+                return;
+            }
+
+            T __temp = list[firstIndex];
+            list[firstIndex] = list[secondIndex];
+            list[secondIndex] = __temp;
         }
 
         /// <summary>
@@ -362,9 +451,13 @@ namespace CommonGames.Utilities.Extensions
         public static void CGRemoveAll<T>(this List<T> list, Func<T, bool> func)
         {
             int i = list.Count;
-            while (i-- > 0)
-                if (func(list[i]))
-                    list.RemoveAt(i);
+            while(i-- > 0)
+            {
+                if(func(list[i]))
+                {
+                    list.RemoveAt(i);   
+                }
+            }
         }
 
         /// <summary>
