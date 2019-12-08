@@ -123,40 +123,6 @@
             </e>
           </e>
           <e p="Scripts" t="Include">
-            <e p="[Core]" t="Include">
-              <e p="Menus" t="Include">
-                <e p="MainMenu.cs" t="Include" />
-              </e>
-              <e p="PlayerSystems" t="Include">
-                <e p="Movement" t="Include">
-                  <e p="Board" t="Include">
-                    <e p="Material" t="Include">
-                      <e p="Toon.shader" t="Include" />
-                    </e>
-                  </e>
-                  <e p="Character" t="Include">
-                    <e p="PlayerCamera.cs" t="Include" />
-                    <e p="PlayerConfigs.cs" t="Include" />
-                    <e p="PlayerController.cs" t="Include" />
-                  </e>
-                  <e p="Skateboard" t="Include">
-                    <e p="ExtensionMethods.cs" t="Include" />
-                    <e p="KartController.cs" t="Include" />
-                  </e>
-                </e>
-              </e>
-              <e p="Utilities" t="Include">
-                <e p="Helpers.cs" t="Include" />
-                <e p="UIComponents" t="Include">
-                  <e p="Editor" t="Include">
-                    <e p="TextButtonEditor.cs" t="Include" />
-                    <e p="TextMPButtonEditor.cs" t="Include" />
-                  </e>
-                  <e p="TextButton.cs" t="Include" />
-                  <e p="TextMPButton.cs" t="Include" />
-                </e>
-              </e>
-            </e>
             <e p="CommonGames" t="Include">
               <e p="Tools" t="Include">
                 <e p="CopyLightingSettings.cs" t="Include" />

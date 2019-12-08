@@ -33,10 +33,7 @@ namespace Core.PlayerSystems.Movement
         public float SpeedPercent => Mathf.Abs(speed / topSpeed);
 
         [PublicAPI]
-        public VehicleSpeed(float topSpeed)
-        {
-            this.topSpeed = topSpeed;
-        }
+        public VehicleSpeed() { }
     }
 
 }

@@ -20,7 +20,7 @@ namespace Core.PlayerSystems.Movement
         [SerializeField] private float wheelHeight = 0.5f;
         [SerializeField] private LayerMask groundCheckLayer = 1 << 1;
 
-        [SerializeField] private WheelsData wheelsData = new WheelsData(wheels: new Wheel[4]);
+        public WheelsData wheelsData = new WheelsData(wheels: new Wheel[4]);
         
         #endregion
 
