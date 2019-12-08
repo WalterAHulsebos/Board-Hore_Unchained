@@ -42,7 +42,9 @@ namespace Core.PlayerSystems.Movement
         
         #region Non-Serialized
         
-        [HideInInspector] public new Rigidbody rigidbody;
+        //[HideInInspector]
+        [ReadOnly]
+        public new Rigidbody rigidbody;
         
         [HideInInspector] public Vector3 averageColliderSurfaceNormal;
 
@@ -59,6 +61,20 @@ namespace Core.PlayerSystems.Movement
         #endregion
 
         #region Methods
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            
+            rigidbody = GetComponentInChildren<Rigidbody>();
+
+            wheelsData = GetComponentInChildren<Wheels>().wheelsData;
+        }
+        
+        private void Awake()
+        {
+            rigidbody = GetComponentInChildren<Rigidbody>();
+        }
 
         private void Start()
         {
