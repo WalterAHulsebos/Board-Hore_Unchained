@@ -86,6 +86,10 @@ namespace Core.PlayerSystems.Movement
 
         private void CalculateSpeedData(VehicleSpeed speedData)
         {
+            //Debug.Log($"VEHICLE IS NULL = {_vehicle == null}");
+            //Debug.Log($"RIGIDBODY IS NULL = {_vehicle.rigidbody == null}");
+            //Debug.Log($"SPEEDDATA IS NULL = {_vehicle.SpeedData == null}");
+            
             speedData.sideSpeed = Vector3.Dot(_vehicle.rigidbody.transform.right, _vehicle.rigidbody.velocity);
             speedData.forwardSpeed = Vector3.Dot(_vehicle.rigidbody.transform.forward, _vehicle.rigidbody.velocity);
             speedData.speed = _vehicle.rigidbody.velocity.magnitude;

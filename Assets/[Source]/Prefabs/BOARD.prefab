@@ -331,11 +331,11 @@ MonoBehaviour:
   wheel:
     mass: 25
     rimOffset: 0
-    tireRadius: 0.4
-    width: 0.25
+    tireRadius: 0.15
+    width: 0.1
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 0, y: 0, z: 0}
+    worldPosition: {x: 47.123375, y: 2.818087, z: -49.4512}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -373,10 +373,10 @@ MonoBehaviour:
     nonRotating: {fileID: 0}
     rim: {fileID: 0}
     rimCollider: {fileID: 0}
-    up: {x: 0, y: 0, z: 0}
+    up: {x: -0.0020419986, y: 0.9999968, z: -0.0015010205}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: 0}
-    right: {x: 0, y: 0, z: 0}
+    forward: {x: 0, y: 0.0015010235, z: 0.99999887}
+    right: {x: 0.9999979, y: 0.0020419962, z: -0.0000030650879}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -469,7 +469,7 @@ MonoBehaviour:
   wheelHits: []
   scanIgnoreLayers:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 1028
   forwardScanResolution: 8
   sideToSideScanResolution: 3
   hasHit: 1
@@ -1413,20 +1413,35 @@ MonoBehaviour:
       Entry: 8
       Data: 
     - Name: SpeedData
-      Entry: 6
+      Entry: 7
+      Data: 1|Core.PlayerSystems.Movement.VehicleSpeed, Assembly-CSharp
+    - Name: speed
+      Entry: 4
+      Data: 0
+    - Name: forwardSpeed
+      Entry: 4
+      Data: 0
+    - Name: sideSpeed
+      Entry: 4
+      Data: 0
+    - Name: topSpeed
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
     - Name: wheelsData
       Entry: 7
-      Data: 1|Core.PlayerSystems.Movement.Wheels+WheelsData, Assembly-CSharp
+      Data: 2|Core.PlayerSystems.Movement.Wheels+WheelsData, Assembly-CSharp
     - Name: wheels
       Entry: 7
-      Data: 2|Core.PlayerSystems.Movement.Wheels+Wheel[], Assembly-CSharp
+      Data: 3|Core.PlayerSystems.Movement.Wheels+Wheel[], Assembly-CSharp
     - Name: 
       Entry: 12
       Data: 4
     - Name: 
       Entry: 7
-      Data: 3|Core.PlayerSystems.Movement.Wheels+Wheel, Assembly-CSharp
+      Data: 4|Core.PlayerSystems.Movement.Wheels+Wheel, Assembly-CSharp
     - Name: wheelController
       Entry: 10
       Data: 0
@@ -1450,7 +1465,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 4|Core.PlayerSystems.Movement.Wheels+Wheel, Assembly-CSharp
+      Data: 5|Core.PlayerSystems.Movement.Wheels+Wheel, Assembly-CSharp
     - Name: wheelController
       Entry: 10
       Data: 1
@@ -1474,7 +1489,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 5|Core.PlayerSystems.Movement.Wheels+Wheel, Assembly-CSharp
+      Data: 6|Core.PlayerSystems.Movement.Wheels+Wheel, Assembly-CSharp
     - Name: wheelController
       Entry: 10
       Data: 2
@@ -1498,7 +1513,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 6|Core.PlayerSystems.Movement.Wheels+Wheel, Assembly-CSharp
+      Data: 7|Core.PlayerSystems.Movement.Wheels+Wheel, Assembly-CSharp
     - Name: wheelController
       Entry: 10
       Data: 3
@@ -1934,11 +1949,11 @@ MonoBehaviour:
   wheel:
     mass: 25
     rimOffset: 0
-    tireRadius: 0.4
-    width: 0.25
+    tireRadius: 0.15
+    width: 0.1
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 0, y: 0, z: 0}
+    worldPosition: {x: 47.123375, y: 2.8156104, z: -51.101196}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -1976,10 +1991,10 @@ MonoBehaviour:
     nonRotating: {fileID: 0}
     rim: {fileID: 0}
     rimCollider: {fileID: 0}
-    up: {x: 0, y: 0, z: 0}
+    up: {x: -0.0020419986, y: 0.9999968, z: -0.0015010205}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: 0}
-    right: {x: 0, y: 0, z: 0}
+    forward: {x: 0, y: 0.0015010235, z: 0.99999887}
+    right: {x: 0.9999979, y: 0.0020419962, z: -0.0000030650879}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -2072,7 +2087,7 @@ MonoBehaviour:
   wheelHits: []
   scanIgnoreLayers:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 1028
   forwardScanResolution: 8
   sideToSideScanResolution: 3
   hasHit: 1
@@ -2708,11 +2723,11 @@ MonoBehaviour:
   wheel:
     mass: 25
     rimOffset: 0
-    tireRadius: 0.4
-    width: 0.25
+    tireRadius: 0.15
+    width: 0.1
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 0, y: 0, z: 0}
+    worldPosition: {x: 46.473373, y: 2.8142831, z: -51.101196}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -2750,10 +2765,10 @@ MonoBehaviour:
     nonRotating: {fileID: 0}
     rim: {fileID: 0}
     rimCollider: {fileID: 0}
-    up: {x: 0, y: 0, z: 0}
+    up: {x: -0.0020419986, y: 0.9999968, z: -0.0015010205}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: 0}
-    right: {x: 0, y: 0, z: 0}
+    forward: {x: 0, y: 0.0015010235, z: 0.99999887}
+    right: {x: 0.9999979, y: 0.0020419962, z: -0.0000030650879}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -2846,7 +2861,7 @@ MonoBehaviour:
   wheelHits: []
   scanIgnoreLayers:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 1028
   forwardScanResolution: 8
   sideToSideScanResolution: 3
   hasHit: 1
@@ -4311,11 +4326,11 @@ MonoBehaviour:
   wheel:
     mass: 25
     rimOffset: 0
-    tireRadius: 0.4
-    width: 0.25
+    tireRadius: 0.15
+    width: 0.1
     rpm: 0
     prevWorldPosition: {x: 0, y: 0, z: 0}
-    worldPosition: {x: 0, y: 0, z: 0}
+    worldPosition: {x: 46.473373, y: 2.8167598, z: -49.451195}
     prevGroundPoint: {x: 0, y: 0, z: 0}
     worldRotation: {x: 0, y: 0, z: 0, w: 0}
     camberCurve:
@@ -4349,14 +4364,14 @@ MonoBehaviour:
     residualAngularVelocity: 0
     steerAngle: 0
     rotationAngle: 0
-    visual: {fileID: 4615833885175133584}
+    visual: {fileID: 4615833884194205084}
     nonRotating: {fileID: 0}
     rim: {fileID: 0}
     rimCollider: {fileID: 0}
-    up: {x: 0, y: 0, z: 0}
+    up: {x: -0.0020419986, y: 0.9999968, z: -0.0015010205}
     inside: {x: 0, y: 0, z: 0}
-    forward: {x: 0, y: 0, z: 0}
-    right: {x: 0, y: 0, z: 0}
+    forward: {x: 0, y: 0.0015010235, z: 0.99999887}
+    right: {x: 0.9999979, y: 0.0020419962, z: -0.0000030650879}
     velocity: {x: 0, y: 0, z: 0}
     prevVelocity: {x: 0, y: 0, z: 0}
     acceleration: {x: 0, y: 0, z: 0}
@@ -4449,7 +4464,7 @@ MonoBehaviour:
   wheelHits: []
   scanIgnoreLayers:
     serializedVersion: 2
-    m_Bits: 4
+    m_Bits: 1028
   forwardScanResolution: 8
   sideToSideScanResolution: 3
   hasHit: 1

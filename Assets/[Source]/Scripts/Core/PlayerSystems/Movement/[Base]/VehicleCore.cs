@@ -29,7 +29,7 @@ namespace Core.PlayerSystems.Movement
         [OdinSerialize] public PlayerInputs InputData { get; set; }
         
         [ReadOnly]
-        [OdinSerialize] public VehicleSpeed SpeedData { get; set; }
+        [OdinSerialize] public VehicleSpeed SpeedData { get; set; } = new VehicleSpeed();
 
         [ReadOnly]
         [LabelText("Grounded")]
@@ -69,16 +69,21 @@ namespace Core.PlayerSystems.Movement
             rigidbody = GetComponentInChildren<Rigidbody>();
 
             wheelsData = GetComponentInChildren<Wheels>().wheelsData;
+            
+            SpeedData = new VehicleSpeed();
         }
         
         private void Awake()
         {
             rigidbody = GetComponentInChildren<Rigidbody>();
+            
+            SpeedData = new VehicleSpeed();
         }
 
         private void Start()
         {
             rigidbody = GetComponentInChildren<Rigidbody>();
+
             
             InitializeVehicleBehaviours();
         }
