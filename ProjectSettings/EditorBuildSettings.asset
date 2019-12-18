@@ -5,19 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/[Source]/Scenes/-[PRELOAD]-.unity
     guid: 88defc756128507479192b27dac2b037
   - enabled: 1
+    path: Assets/[Source]/Scenes/Tests/TESTSCENE_ENVIRONMENT.unity
+    guid: 9380750e15f21ed49804a2e513f581b3
+  - enabled: 0
     path: Assets/[Source]/Scenes/Walter/Managers.unity
     guid: 21b88c086383c7f4ba5ab5816ddcc006
-  - enabled: 1
+  - enabled: 0
     path: Assets/[Source]/Scenes/Walter/Lighting.unity
     guid: 60349f745e2f1da479c5d5e444e476b6
-  - enabled: 1
+  - enabled: 0
     path: Assets/[Source]/Scenes/Walter/Environment.unity
     guid: ba607f3286890d74987086ddaec2526b
-  - enabled: 1
+  - enabled: 0
     path: Assets/[Source]/Scenes/Walter/Gameplay.unity
     guid: 3158ae4a0f8f2194fbf74ed57a07b556
   m_configObjects: {}

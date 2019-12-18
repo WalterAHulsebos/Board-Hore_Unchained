@@ -29,7 +29,7 @@ namespace Core.PlayerSystems.Movement
         [OdinSerialize] public PlayerInputs InputData { get; set; }
         
         [ReadOnly]
-        [OdinSerialize] public VehicleSpeed SpeedData { get; set; }
+        [OdinSerialize] public VehicleSpeed SpeedData { get; set; } = new VehicleSpeed();
 
         [ReadOnly]
         [LabelText("Grounded")]
@@ -42,7 +42,9 @@ namespace Core.PlayerSystems.Movement
         
         #region Non-Serialized
         
-        [HideInInspector] public new Rigidbody rigidbody;
+        //[HideInInspector]
+        [ReadOnly]
+        public new Rigidbody rigidbody;
         
         [HideInInspector] public Vector3 averageColliderSurfaceNormal;
 
@@ -60,9 +62,28 @@ namespace Core.PlayerSystems.Movement
 
         #region Methods
 
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            
+            rigidbody = GetComponentInChildren<Rigidbody>();
+
+            wheelsData = GetComponentInChildren<Wheels>().wheelsData;
+            
+            SpeedData = new VehicleSpeed();
+        }
+        
+        private void Awake()
+        {
+            rigidbody = GetComponentInChildren<Rigidbody>();
+            
+            SpeedData = new VehicleSpeed();
+        }
+
         private void Start()
         {
             rigidbody = GetComponentInChildren<Rigidbody>();
+
             
             InitializeVehicleBehaviours();
         }
