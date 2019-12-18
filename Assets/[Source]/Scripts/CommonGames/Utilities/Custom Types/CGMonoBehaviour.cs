@@ -13,7 +13,6 @@ using Sirenix.OdinInspector.Editor;
 
 public abstract class CGMonoBehaviour : MonoBehaviour
 {
-
     public static event Action OnAnyDestroyedInEditor_Event;
     
     private bool _isInitialized = false;
@@ -35,11 +34,12 @@ public abstract class CGMonoBehaviour : MonoBehaviour
     protected abstract void OnEditorDisable();
     protected abstract void OnEditorDestroy();
     
+    #if UNITY_EDITOR
     [CustomEditor(typeof(CGMonoBehaviour), editorForChildClasses: true)]
     public class CGMonoBehaviourEditor : 
-        #if ODIN_INSPECTOR
+        #if ODIN_INSPECTOR && UNITY_EDITOR
         OdinEditor
-        #else
+        #elif UNITY_EDITOR
         Editor
         #endif
     {
@@ -81,4 +81,5 @@ public abstract class CGMonoBehaviour : MonoBehaviour
             }
         }
     }
+    #endif
 }
