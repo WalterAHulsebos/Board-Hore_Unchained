@@ -10,55 +10,6 @@ using Sirenix.Serialization;
 
 using JetBrains.Annotations;
 
-/*
-#if UNITY_EDITOR
-using UnityEditor;
-
-namespace Utilities.CGTK.CGPooling
-{
-	[CanEditMultipleObjects]
-	[CustomEditor(typeof(GameObjectPool))]
-	public class GameObjectPool_Inspector : Inspector<GameObjectPool>
-	{
-		protected override void DrawInspector()
-		{
-			BeginError(Any(t => t.prefab == null));
-				Draw("Prefab", "The prefab this pool controls.");
-			EndError();
-			
-			Draw("Notification", "If you need to peform a special action when a prefab is spawned or despawned, then this allows you to control how that action is performed. None = If you use this then you must rely on the OnEnable and OnDisable messages. SendMessage = The prefab clone is sent the OnSpawn and OnDespawn messages. BroadcastMessage = The prefab clone and all its children are sent the OnSpawn and OnDespawn messages. IPoolable = The prefab clone's components implementing IPoolable are called. Broadcast IPoolable = The prefab clone and all its child components implementing IPoolable are called.");
-			Draw("Preload", "Should this pool preload some clones?");
-			Draw("Capacity", "Should this pool have a maximum amount of spawnable clones?");
-			Draw("Recycle", "If the pool reaches capacity, should new spawns force older ones to despawn?");
-			Draw("Persist", "Should this pool be marked as DontDestroyOnLoad?");
-			Draw("Stamp", "Should the spawned clones have their clone index appended to their name?");
-			Draw("Warnings", "Should detected issues be output to the console?");
-
-			EditorGUILayout.Separator();
-
-			EditorGUI.BeginDisabledGroup(true);
-				EditorGUILayout.IntField("Spawned", Target.Spawned);
-				EditorGUILayout.IntField("Despawned", Target.Despawned);
-				EditorGUILayout.IntField("Total", Target.Total);
-			EditorGUI.EndDisabledGroup();
-		}
-
-		[MenuItem("GameObject//Pool", false, 1)]
-		private static void CreateLocalization()
-		{
-			GameObject __gameObject = new GameObject(typeof(GameObjectPool).Name);
-
-			Undo.RegisterCreatedObjectUndo(__gameObject, "Create GameObjectPool");
-
-			__gameObject.AddComponent<GameObjectPool>();
-
-			Selection.activeGameObject = __gameObject;
-		}
-	}
-}
-#endif
-*/
-
 namespace CommonGames.Utilities.CGTK.CGPooling
 {
 	/// <inheritdoc />

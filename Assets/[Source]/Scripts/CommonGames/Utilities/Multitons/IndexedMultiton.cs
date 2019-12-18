@@ -30,7 +30,7 @@ namespace CommonGames.Utilities
         public int Index => IndexFromInstance(instance: this as T);
 
         [HorizontalGroup(@group: "Index")]
-        [Button(name: @"/\")]
+        [Button(name: "＋")]
         public void IndexSwapUp()
         {
             IndexedMultiton<T> __nextAvailableInstance = GetNextAvailableInstance(above: true);
@@ -64,7 +64,7 @@ namespace CommonGames.Utilities
         }
 
         [HorizontalGroup(@group: "Index")]
-        [Button(name: @"\/")]
+        [Button(name: "—")]
         public void IndexSwapDown()
         {
             IndexedMultiton<T> __nextAvailableInstance = GetNextAvailableInstance(above: false);

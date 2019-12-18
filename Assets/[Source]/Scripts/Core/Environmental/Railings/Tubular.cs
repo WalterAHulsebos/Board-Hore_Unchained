@@ -8,13 +8,11 @@ using CommonGames.Utilities.Extensions;
 
 namespace Core.Environmental.Railings 
 {
-	using static CommonGames.Utilities.Extensions.Constants;
+	using static CommonGames.Utilities.Defaults;
 	//using Curve = Core.Environmental.Railings.Curve;
 	
 	public class Tubular
 	{
-		private const float _PI2 = Mathf.PI * 2;
-
 		public static Mesh Build(Curve curve, int tubularSegments, float radius, int radialSegments, bool closed) 
 		{
 			List<Vector3> __vertices = new List<Vector3>();
@@ -90,7 +88,7 @@ namespace Core.Environmental.Railings
 
 			for(int __j = 0; __j <= radialSegments; __j++)
 			{
-				float __v = 1f * __j / radialSegments * _PI2;
+				float __v = 1f * __j / radialSegments * PI_2;
 				float __sin = Mathf.Sin(f: __v);
 				float __cos = Mathf.Cos(f: __v);
 

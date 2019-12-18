@@ -1,0 +1,16 @@
+{
+    "name": "WheelController.Editor",
+    "references": [
+        "GUID:3f2ae06f6b857c34ca05527c3cb06705"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

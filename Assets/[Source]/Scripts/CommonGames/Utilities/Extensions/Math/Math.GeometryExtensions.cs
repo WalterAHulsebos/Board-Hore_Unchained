@@ -7,7 +7,7 @@ using CommonGames.Utilities.CGTK;
 
 using JetBrains.Annotations;
 
-using static CommonGames.Utilities.Extensions.Constants;
+using static CommonGames.Utilities.Defaults;
 
 namespace CommonGames.Utilities.Extensions
 {

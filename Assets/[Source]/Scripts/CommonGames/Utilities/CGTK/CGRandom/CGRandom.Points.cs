@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Utilities.CGTK;
 
-namespace Utilities.CGTK
+using UnityEngine;
+
+namespace CommonGames.Utilities.CGTK
 {
 	 public static partial class CGRandom
 	 {

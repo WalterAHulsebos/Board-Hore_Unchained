@@ -47,7 +47,9 @@ namespace Core.Environmental.Railings
 		
 		public UltEvent refresh;
 
+		#if ODIN_INSPECTOR && UNITY_EDITOR
 		[ShowInInspector]
+		#endif
 		public List<Vector3> Points
 		{
 			get => points;
@@ -61,7 +63,9 @@ namespace Core.Environmental.Railings
 		
 		public float Units { get; protected set; } = 0f;
 
+		#if ODIN_INSPECTOR && UNITY_EDITOR
 		[ReadOnly]
+		#endif
 		public List<Vector3> generatedPoints = null;
 
 		[SerializeField] protected CurveType type = CurveType.CatmullRom;
@@ -108,7 +112,9 @@ namespace Core.Environmental.Railings
 		private (Vector3 closestPosition, int closestIndex, Vector3 secondClosestPosition, int secondClosestIndex) GetTwoClosestPointsWithIndexes(in Vector3 point) 
 			=> generatedPoints.TwoClosestWithIndexes(comparer: point);
 
+		#if UNITY_EDITOR
 		[PublicAPI]
+		#endif
 		public (Vector3 startPosition, Vector3 startDirection) GetInterpolatedStartPointAndDirection(in Vector3 position)
 		{
 			//Debug.Log("Check 01");
@@ -141,7 +147,9 @@ namespace Core.Environmental.Railings
 		}
 		
 		/// <summary> Gets the appropriate start point on the tube for your position. </summary>
+		#if UNITY_EDITOR
 		[PublicAPI]
+		#endif
 		public float GetStartPoint(in Vector3 position)
 		{
 			(Vector3 __closestPoint, int __closestIndex, Vector3 __secondClosestPoint, int __secondClosestIndex) = GetTwoClosestPointsWithIndexes(point: position);
@@ -207,7 +215,9 @@ namespace Core.Environmental.Railings
 			return __curve;
 		}
 		
+		#if UNITY_EDITOR
 		[PublicAPI]
+		#endif
 		public void AddPoint(Vector3 point)
 		{
 			if(Points == null)
@@ -324,6 +334,7 @@ namespace Core.Environmental.Railings
 		
 	}
 
+	#if UNITY_EDITOR && ODIN_INSPECTOR
 	[CustomEditor (inspectedType: typeof(TubeGenerator))]
 	public class TubeGeneratorEditor : OdinEditor 
 	{
@@ -398,4 +409,5 @@ namespace Core.Environmental.Railings
 
 	}
 	
+	#endif
 }
