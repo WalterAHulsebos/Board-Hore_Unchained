@@ -37,34 +37,34 @@ public abstract class CGMonoBehaviour : MonoBehaviour
     
     [CustomEditor(typeof(CGMonoBehaviour), editorForChildClasses: true)]
     public class CGMonoBehaviourEditor : 
-        #if Odin_Editor
-        Editor
-        #else
+        #if ODIN_INSPECTOR
         OdinEditor
+        #else
+        Editor
         #endif
     {
         private bool _runningInEditor = true;
         
-        #if Odin_Editor
-        private void OnEnable()
-        {
-        #else
+        #if ODIN_INSPECTOR
         protected override void OnEnable()
         {
             base.OnEnable();
+        #else
+        private void OnEnable()
+        {
         #endif
         
             _runningInEditor = Application.isEditor && !Application.isPlaying;
         }
 
         
-        #if Odin_Editor
-        private void OnDisable()
-        {
-        #else
+        #if ODIN_INSPECTOR
         protected override void OnDisable()
         {
             base.OnDisable();
+        #else
+        private void OnDisable()
+        {
         #endif
 
             if(!_runningInEditor) return;
