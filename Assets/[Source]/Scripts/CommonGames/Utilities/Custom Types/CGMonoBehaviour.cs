@@ -5,15 +5,14 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 #region ODIN_INSPECTOR
 using Sirenix.OdinInspector.Editor;
 #endregion
+#endif
 
 public abstract class CGMonoBehaviour : MonoBehaviour
 {
-    #if UNITY_EDITOR
 
     public static event Action OnAnyDestroyedInEditor_Event;
     
@@ -82,6 +81,4 @@ public abstract class CGMonoBehaviour : MonoBehaviour
             }
         }
     }
-
-    #endif
 }

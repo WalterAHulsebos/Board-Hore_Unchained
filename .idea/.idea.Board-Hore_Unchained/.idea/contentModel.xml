@@ -368,6 +368,7 @@
                 </e>
                 <e p="Singletons" t="Include">
                   <e p="Editor" t="Include">
+                    <e p="CommonGames.Singletons.Editor.asmdef" t="Include" />
                     <e p="EditorSingleton.cs" t="Include" />
                     <e p="EditorSingletonTest.cs" t="Include" />
                   </e>
@@ -3475,8 +3476,10 @@
         </e>
         <e p="WheelController" t="Include">
           <e p="Editor" t="Include">
+            <e p="WheelController.Editor.asmdef" t="Include" />
             <e p="WheelControllerInspector.cs" t="Include" />
           </e>
+          <e p="NWH.asmdef" t="Include" />
           <e p="WheelController.API.cs" t="Include" />
           <e p="WheelController.cs" t="Include" />
           <e p="WheelController.Debug.cs" t="Include" />
@@ -3486,6 +3489,7 @@
       <e p="Board-Hore_Unchained.sln" t="IncludeFlat" />
       <e p="CommonGames.csproj" t="IncludeRecursive" />
       <e p="CommonGames.EditorTools.csproj" t="IncludeRecursive" />
+      <e p="CommonGames.Singletons.Editor.csproj" t="IncludeRecursive" />
       <e p="Core.csproj" t="IncludeRecursive" />
       <e p="ExtendedTransformInspector.csproj" t="IncludeRecursive" />
       <e p="Facepunch.Highlight.csproj" t="IncludeRecursive" />
@@ -3496,6 +3500,7 @@
       <e p="Klak.Motion.Editor.csproj" t="IncludeRecursive" />
       <e p="Klak.Wiring.csproj" t="IncludeRecursive" />
       <e p="Klak.Wiring.Editor.csproj" t="IncludeRecursive" />
+      <e p="NWH.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
       <e p="Sirenix.OdinInspector.CompatibilityLayer.csproj" t="IncludeRecursive" />
@@ -3503,6 +3508,7 @@
       <e p="Sirenix.OdinValidator.csproj" t="IncludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
       <e p="UltEvents.csproj" t="IncludeRecursive" />
+      <e p="WheelController.Editor.csproj" t="IncludeRecursive" />
     </e>
     <e p="C:\Users\bloem\.Rider2019.2\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\bloem\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Board-Hore_Unchained.-1757782050.00" t="ExcludeRecursive" />
