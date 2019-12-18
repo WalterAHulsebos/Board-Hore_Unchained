@@ -34,15 +34,22 @@ namespace CommonGames.Utilities
         where T : Multiton<T>
     {
         [PublicAPI]
-        [ShowInInspector]
-        [OdinSerialize]
-        [NonSerialized]
+        //[OdinSerialize]
+        //[NonSerialized]
         [ListDrawerSettings(ShowIndexLabels = true)]
         public static List<T> Instances = new List<T>();
         
         [PublicAPI]
         public static int IndexFromInstance(T instance) => Instances.IndexOf(instance);
-        
+
+        /// <summary> Access you the vehicle at Index i </summary>
+        [PublicAPI]
+        public T this[in int i]
+        {
+            get => Instances[i];
+            set => Instances[i] = value;
+        }
+
         private bool _initialized = false;
         
         ///<summary> Associate Multiton to its Instance.</summary>
@@ -105,7 +112,7 @@ namespace CommonGames.Utilities
             {
                 T __instance = Instances[__index];
                 
-                Debug.Log($"Index = {__index}, \n Instance is null? = {__instance.SafeIsUnityNull()}");
+                //Debug.Log($"Index = {__index}, \n Instance is null? = {__instance.SafeIsUnityNull()}");
 
                 if(__instance.SafeIsUnityNull()) continue;
 

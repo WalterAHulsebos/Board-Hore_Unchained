@@ -4,7 +4,7 @@ using System.Reflection;
 
 using UnityEngine;
 
-using static CommonGames.Utilities.Extensions.Constants;
+using static CommonGames.Utilities.Defaults;
 
 namespace CommonGames.Utilities.Extensions
 {

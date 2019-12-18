@@ -1,16 +1,20 @@
-﻿namespace CommonGames.Utilities
-{
-	using UnityEngine;
+﻿using UnityEngine;
 	
-	using JetBrains.Annotations;
+using JetBrains.Annotations;
 
-	#if ODIN_INSPECTOR
-	using MonoBehaviour = Sirenix.OdinInspector.SerializedMonoBehaviour; 
-	#endif
-	
-	/// <typeparam name="T">Type of the Singleton</typeparam>
-	public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
+#if ODIN_INSPECTOR
+using MonoBehaviour = Sirenix.OdinInspector.SerializedMonoBehaviour; 
+#endif
+
+namespace CommonGames.Utilities
+{
+
+	/// <typeparam name="T"> Type of the Singleton. </typeparam>
+	public abstract class Singleton<T> : MonoBehaviour 
+		where T : Singleton<T>
 	{
+		#region Variables
+
 		/// <summary> The static reference to the Instance </summary>
 		[PublicAPI]
 		public static T Instance { get; protected set; }
@@ -18,6 +22,10 @@
 		/// <summary> Gets whether an Instance of this singleton exists </summary>
 		[PublicAPI]
 		public static bool InstanceExists => (Instance != null);
+		
+		#endregion
+
+		#region Methods
 
 		/// <summary> OnEnable method to associate Singleton with Instance </summary>
 		protected virtual void OnEnable()
@@ -40,5 +48,7 @@
 				Instance = null;
 			}
 		}
+
+		#endregion
 	}
 }

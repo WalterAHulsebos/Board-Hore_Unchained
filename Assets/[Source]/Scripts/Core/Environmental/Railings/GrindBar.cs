@@ -32,7 +32,9 @@ namespace Core.Environmental.Railings
             __grindAbility.AttachToBar(bar: tubeGenerator);
         }
         
+        #if UNITY_EDITOR
         [MenuItem("GameObject/3D Object/Create GrindBar")]
+        #endif
         private static void CreateGrindBar()
         {
             GameObject __gameObject = new GameObject("New GrindBar");

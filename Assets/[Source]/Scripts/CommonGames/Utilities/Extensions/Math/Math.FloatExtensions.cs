@@ -13,6 +13,23 @@ namespace CommonGames.Utilities.Extensions
 			Mathf.Clamp(value: value, min: min, max: max);
 
 		public static float Clamp01(this float value) => Mathf.Clamp01(value: value);
+		
+		public static float ClampAngle(this float angle, float min, float max)
+		{
+			while (angle < -360 || angle > 360)
+			{
+				if(angle < -360)
+				{
+					angle += 360;
+				}
+				if(angle > 360)
+				{
+					angle -= 360;
+				}
+			}
+
+			return Clamp(angle, min, max);
+		}
 
 		#endregion
 

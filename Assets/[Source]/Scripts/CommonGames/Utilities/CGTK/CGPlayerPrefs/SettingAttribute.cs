@@ -1,4 +1,4 @@
-﻿namespace Utilities.CGTK
+﻿namespace CommonGames.Utilities.CGTK
 {
 	using System;
 	using System.Collections;

@@ -10,7 +10,11 @@
     public static partial class CGDebug
     {
         private static readonly AudioSource Previewer = 
+        #if UNITY_EDITOR
             UnityEditor.EditorUtility.CreateGameObjectWithHideFlags("Audio Previewer", HideFlags.HideAndDontSave, typeof(AudioSource)).GetComponent<AudioSource>();
+        #else
+            null;
+        #endif
         
         public static void PlaySound(AudioEvent audioEvent, AudioSource audioSource = null)
         {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using CommonGames.Utilities.CustomTypes;
 using CommonGames.Utilities;
 using CommonGames.Utilities.Extensions;
 using CommonGames.Utilities.Helpers;

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 using JetBrains.Annotations;
 
-using static CommonGames.Utilities.Extensions.Constants;
+using static CommonGames.Utilities.Defaults;
 
 namespace CommonGames.Utilities.Extensions
 {
@@ -160,6 +160,31 @@ namespace CommonGames.Utilities.Extensions
             TimeSpan result = TimeSpan.FromSeconds(seconds);
             return string.Format($"{result.Hours}:{result.Minutes}:{result.Seconds}");
         }
+
+        /// <summary> Logs a string value to the console. </summary>
+        public static void Log(this string message)
+        {
+            CommonGames.Utilities.CGTK.CGDebug.Log(message);
+        }
+        
+        /// <summary> Logs a value (ToString()) to the console. </summary>
+        public static void Log<T>(this T obj)
+        {
+            CommonGames.Utilities.CGTK.CGDebug.Log(obj.ToString());
+        }
+        
+        /// <summary> Logs a value (ToString()) to the console. </summary>
+        public static void Log<T>(this T obj, string message)
+        {
+            try
+            {
+                CommonGames.Utilities.CGTK.CGDebug.LogFormat(message, obj.ToString());
+            }
+            catch
+            {
+                CommonGames.Utilities.CGTK.CGDebug.LogError("Debug Logging Went Wrong");
+            }
+        }
     }
 
     public class ListArray<T>
@@ -267,31 +292,6 @@ namespace CommonGames.Utilities.Extensions
         private float min, max;
         [SerializeField]
         private AnimationCurve curve;
-    }
-
-    /// <summary>
-    /// Instead of having multiple booleans ie (talkingBlocksWalking, fallingBlocksWalking, etc) just use one lock and increment if something is
-    /// blocking it and decrement it when something stops blocking it.
-    /// </summary>
-    public struct CGLock
-    {
-        private readonly int _value;
-        
-        [PublicAPI]
-        public bool Locked => _value > 0;
-
-        public CGLock(in int value = 0) => _value = value;
-        
-        public static CGLock operator +(in CGLock a, in CGLock b) => new CGLock(a._value + b._value);
-        public static CGLock operator -(in CGLock a, in CGLock b) => new CGLock(a._value - b._value);
-        
-        public static CGLock operator ++(in CGLock a) => new CGLock(a._value + 1);
-        public static CGLock operator --(in CGLock a) => new CGLock(a._value - 1);
-
-        public static implicit operator int(in CGLock a) => a._value;
-        public static implicit operator CGLock(in int i) => new CGLock(i);
-        
-        public static implicit operator bool(in CGLock cgLock) => !cgLock.Locked;
     }
 
     /// <summary>

@@ -6,7 +6,7 @@ using UnityEngine;
 
 using JetBrains.Annotations;
 
-using static CommonGames.Utilities.Extensions.Constants;
+using static CommonGames.Utilities.Defaults;
 
 using SRandom = System.Random;
 
