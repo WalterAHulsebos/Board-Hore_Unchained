@@ -1,0 +1,16 @@
+////////////////////////////////////////////////////////////
+// Animancer // 3D Game Kit Example //
+////////////////////////////////////////////////////////////
+
+This example is based on Unity's 3D Game Kit:
+https://assetstore.unity.com/packages/templates/tutorials/3d-game-kit-115747
+
+In order to use it you must:
+1. Create a new Unity project.
+2. Import Animancer and the 3D Game Kit (it's several gigabytes).
+3. Extract the contents of the 3D Game Kit Example.zip beside this Read Me.
+
+The full documentation for this example is located at:
+https://kybernetikgames.github.io/animancer/docs/examples/animator-controllers/3d-game-kit/
+
+////////////////////////////////////////////////////////////
