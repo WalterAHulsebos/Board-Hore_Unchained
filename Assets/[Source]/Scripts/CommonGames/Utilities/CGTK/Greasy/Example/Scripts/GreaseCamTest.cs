@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Utilities.CGTK;
+﻿using UnityEngine;
+
 using CommonGames.Utilities.CGTK.Greasy;
-using Utilities.Extensions;
-using Sirenix.OdinInspector;
 
 public class GreaseCamTest : MonoBehaviour
 {

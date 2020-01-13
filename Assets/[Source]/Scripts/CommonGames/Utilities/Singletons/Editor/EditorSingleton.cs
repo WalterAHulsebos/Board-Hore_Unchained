@@ -57,8 +57,10 @@ namespace CommonGames.Utilities
         }
 
         /// <summary> OnDestroy method to clear Singleton association </summary>
-        protected virtual void OnDestroy()
+        protected void OnDestroy()
         {
+            //base.OnDestroy();
+            
             Debug.Log("THE EDITOR SINGLETON HAS BEEN DESTROYED");
             
             if (Instance == this)
@@ -74,14 +76,7 @@ namespace CommonGames.Utilities
 
             Debug.Log("EDITOR ENABLE");
             
-            if(InstanceExists)
-            {
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                Instance = (T)this;
-            }
+            OnEnable();
         }
         protected override void OnEditorDisable() { }
 

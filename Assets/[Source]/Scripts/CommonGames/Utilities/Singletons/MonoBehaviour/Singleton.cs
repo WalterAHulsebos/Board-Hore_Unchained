@@ -13,22 +13,28 @@ namespace CommonGames.Utilities
 	public abstract class Singleton<T> : MonoBehaviour 
 		where T : Singleton<T>
 	{
-		#region Variables
+        #region Variables
 
-		/// <summary> The static reference to the Instance </summary>
-		[PublicAPI]
-		public static T Instance { get; protected set; }
+        private static T _instance = null;
 
-		/// <summary> Gets whether an Instance of this singleton exists </summary>
-		[PublicAPI]
-		public static bool InstanceExists => (Instance != null);
-		
-		#endregion
+        /// <summary> The static reference to the Instance </summary>
+        [PublicAPI]
+        public static T Instance
+        {
+            get => _instance = _instance ? _instance : FindObjectOfType<T>();
+            protected set => _instance = value;
+        }
 
-		#region Methods
+        /// <summary> Gets whether an Instance of this singleton exists </summary>
+        [PublicAPI]
+        public static bool InstanceExists => (_instance != null);
 
-		/// <summary> OnEnable method to associate Singleton with Instance </summary>
-		protected virtual void OnEnable()
+        #endregion
+
+        #region Methods
+
+        /// <summary> OnEnable method to associate Singleton with Instance </summary>
+        protected virtual void OnEnable()
 		{
 			if (InstanceExists)
 			{

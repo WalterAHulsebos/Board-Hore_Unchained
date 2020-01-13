@@ -57,7 +57,7 @@ public class MC_AnimsTest : MonoBehaviour
     [ReadOnly] [SerializeField]
     private float 
         _timeAccelerated = 0f,
-        _velocityEvaluation = 0f,
+        _accelerateEvaluation = 0f,
         
         _timeDecelerated = 0f,
         _decelerateEvaluation = 0f,
@@ -136,9 +136,9 @@ public class MC_AnimsTest : MonoBehaviour
             {
                 _timeAccelerated += Time.deltaTime;
 
-                _velocityEvaluation = (_timeAccelerated / timeTillMaxSpeed).Clamp01();
+                _accelerateEvaluation = (_timeAccelerated / timeTillMaxSpeed).Clamp01();
 
-                float __lerpValue = accelerationCurve.Evaluate(_velocityEvaluation);
+                float __lerpValue = accelerationCurve.Evaluate(_accelerateEvaluation);
                 return Mathf.Lerp(0, 1, __lerpValue);
             }
             
@@ -166,8 +166,10 @@ public class MC_AnimsTest : MonoBehaviour
         }
         else
         {
+            _timeDecelerated = decellerationCurve.TimeFromValue(value: _accelerateEvaluation); //Reverse calculate starting point (closest to).
+            
             _timeAccelerated = default;
-            _velocityEvaluation = default;
+            _accelerateEvaluation = default; 
             
             //=====
 
@@ -253,21 +255,7 @@ public class MC_AnimsTest : MonoBehaviour
                 
             SetLanding();
 
-            _timeAccelerated = default;
-            _velocityEvaluation = default;
-
-            _timeDecelerated = default;
-            _decelerateEvaluation = default;
-
-            _timeJumping = default;
-            _jumpingEvaluation = default;
-
-            _idle = true; //idle to true!
-            _accelerate = false;
-            _cruise = false;
-
-            _chargingJump = false;
-            _jumping = false;
+            ResetValues(_idle: true);
             
             return true;
         }
@@ -284,6 +272,42 @@ public class MC_AnimsTest : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void ResetValues
+    (
+        float _timeAccelerated = default,
+        float _velocityEvaluation = default,
+
+        float _timeDecelerated = default,
+        float _decelerateEvaluation = default,
+
+        float _timeJumping = default,
+        float _jumpingEvaluation = default,
+
+        bool _idle = default, 
+        bool _accelerate = default,
+        bool _cruise = default,
+
+        bool _chargingJump = default,
+        bool _jumping = default
+    )
+    {
+        this._timeAccelerated = _timeAccelerated;
+        this._velocityEvaluation = _velocityEvaluation;
+
+        this._timeDecelerated = _timeDecelerated;
+        this._decelerateEvaluation = _decelerateEvaluation;
+
+        this._timeJumping = _timeJumping;
+        this._jumpingEvaluation = _jumpingEvaluation;
+
+        this._idle = _idle;
+        this._accelerate = _accelerate;
+        this._cruise = _cruise;
+
+        this._chargingJump = _chargingJump;
+        this._jumping = _jumping;
     }
 
     #region Animation Adjusters

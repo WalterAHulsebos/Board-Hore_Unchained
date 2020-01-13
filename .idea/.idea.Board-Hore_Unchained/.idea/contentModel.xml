@@ -132,10 +132,56 @@
             <e p="AnimationTest.cs" t="Include" />
             <e p="CommonGames" t="Include">
               <e p="CommonGames.asmdef" t="Include" />
+              <e p="Shaders" t="Include">
+                <e p="CrossFadingLOD" t="Include">
+                  <e p="CrossFadingLod.shader" t="Include" />
+                  <e p="CrossFadingLodDither.shader" t="Include" />
+                </e>
+                <e p="GradientController" t="Include">
+                  <e p="GradientController.cginc" t="Include" />
+                  <e p="GradientController.cs" t="Include" />
+                  <e p="GradientControllerOpaque.shader" t="Include" />
+                  <e p="GradientControllerTransparent.shader" t="Include" />
+                  <e p="GradientHandle.cs" t="Include" />
+                  <e p="LICENSE.txt" t="Include" />
+                </e>
+                <e p="PostFX" t="Include">
+                  <e p="Cavity" t="Include">
+                    <e p="Cavity.cs" t="Include" />
+                    <e p="Cavity.shader" t="Include" />
+                  </e>
+                  <e p="GrayScale" t="Include">
+                    <e p="GrayScale.cs" t="Include" />
+                    <e p="GrayScale.shader" t="Include" />
+                  </e>
+                  <e p="LightLeak" t="Include">
+                    <e p="LightLeak.cs" t="Include" />
+                    <e p="LightLeak.shader" t="Include" />
+                    <e p="LightLeaks" t="Include">
+                      <e p="LightLeaks.cs" t="Include" />
+                      <e p="LightLeaks.shader" t="Include" />
+                    </e>
+                  </e>
+                  <e p="SSAO.shader" t="Include" />
+                  <e p="SSAOEffectHolder.cs" t="Include" />
+                </e>
+                <e p="VertexColorShader" t="Include">
+                  <e p="Editor" t="Include">
+                    <e p="CommonGames.Editor.asmdef" t="Include" />
+                    <e p="Standard_VCShaderGUI.cs" t="Include" />
+                  </e>
+                  <e p="StandardVC.shader" t="Include" />
+                  <e p="UnityStandardCore_VC.cginc" t="Include" />
+                  <e p="UnityStandardCoreForward_VC.cginc" t="Include" />
+                  <e p="UnityStandardCoreForwardSimple_VC.cginc" t="Include" />
+                  <e p="UnityStandardInput_VC.cginc" t="Include" />
+                  <e p="UnityStandardMeta_VC.cginc" t="Include" />
+                </e>
+              </e>
               <e p="Tools" t="Include">
-                <e p="CopyLightingSettings.cs" t="Include" />
-                <e p="Editor" t="Include">
+                <e p="Editor Tools" t="Include">
                   <e p="CommonGames.EditorTools.asmdef" t="Include" />
+                  <e p="CopyLightingSettings.cs" t="Include" />
                   <e p="Grapphig" t="Include">
                     <e p="Channel.cs" t="Include" />
                     <e p="Demo" t="Include">
@@ -150,8 +196,10 @@
                     <e p="SettingsWindow.cs" t="Include" />
                     <e p="TimeKeeper.cs" t="Include" />
                   </e>
+                  <e p="PhysicsPlacement.cs" t="Include" />
+                  <e p="ShurikenScaler.cs" t="Include" />
+                  <e p="ThemeHacker.cs" t="Include" />
                   <e p="Transform Editor Extended" t="Include">
-                    <e p="ExtendedTransformEditor.asmdef" t="Include" />
                     <e p="ExtendedTransformEditor.cs" t="Include" />
                     <e p="Utility" t="Include">
                       <e p="CustomFloatField.cs" t="Include" />
@@ -165,17 +213,6 @@
                     <e p="UnityEventDrawerEx.cs" t="Include" />
                   </e>
                 </e>
-                <e p="MultiScene" t="Include">
-                  <e p="MultiScene.cs" t="Include" />
-                  <e p="MultiSceneEditor.cs" t="Include" />
-                  <e p="MultiSceneLoader.cs" t="Include" />
-                  <e p="PreloadSceneLoader.cs" t="Include" />
-                  <e p="SceneReference" t="Include">
-                    <e p="SceneReference.cs" t="Include" />
-                    <e p="SceneReferencePropertyDrawer.cs" t="Include" />
-                  </e>
-                </e>
-                <e p="PhysicsPlacement.cs" t="Include" />
               </e>
               <e p="Utilities" t="Include">
                 <e p="[Defaults].cs" t="Include" />
@@ -221,6 +258,7 @@
                     </e>
                   </e>
                   <e p="CGMath" t="Include">
+                    <e p="CGMath.Bezier.cs" t="Include" />
                     <e p="CGMath.General.cs" t="Include" />
                     <e p="CGMath.Lerping.cs" t="Include" />
                     <e p="CGMath.Quaternions.cs" t="Include" />
@@ -300,7 +338,20 @@
                 </e>
                 <e p="Custom Types" t="Include">
                   <e p="CGLock.cs" t="Include" />
-                  <e p="CGMonoBehaviour.cs" t="Include" />
+                  <e p="CGMonoBehaviour" t="Include">
+                    <e p="CGMonoBehaviour.cs" t="Include" />
+                    <e p="CommonGames.Editor.asmref" t="Include" />
+                  </e>
+                  <e p="MultiScene" t="Include">
+                    <e p="MultiScene.cs" t="Include" />
+                    <e p="MultiSceneEditor.cs" t="Include" />
+                    <e p="MultiSceneLoader.cs" t="Include" />
+                    <e p="PreloadSceneLoader.cs" t="Include" />
+                    <e p="SceneReference" t="Include">
+                      <e p="SceneReference.cs" t="Include" />
+                      <e p="SceneReferencePropertyDrawer.cs" t="Include" />
+                    </e>
+                  </e>
                   <e p="RangedFloat.cs" t="Include" />
                   <e p="UI" t="Include">
                     <e p="LayoutGroups" t="Include">
@@ -311,6 +362,7 @@
                   <e p="UUID.cs" t="Include" />
                 </e>
                 <e p="Extensions" t="Include">
+                  <e p="AnimationCurveExtensions.cs" t="Include" />
                   <e p="BehaviourExtensions.cs" t="Include" />
                   <e p="Containers" t="Include">
                     <e p="Extensions.ContainerExtensions.cs" t="Include" />
@@ -375,10 +427,11 @@
                 </e>
                 <e p="Singletons" t="Include">
                   <e p="Editor" t="Include">
-                    <e p="CommonGames.Singletons.Editor.asmdef" t="Include" />
+                    <e p="CommonGames.Editor.asmref" t="Include" />
                     <e p="EditorSingleton.cs" t="Include" />
                     <e p="EditorSingletonTest.cs" t="Include" />
                   </e>
+                  <e p="ExecuteAlwaysSingleton.cs" t="Include" />
                   <e p="MonoBehaviour" t="Include">
                     <e p="Ensured" t="Include">
                       <e p="EnsuredSingleton.cs" t="Include" />
@@ -3328,10 +3381,9 @@
       </e>
       <e p="Board-Hore_Unchained.sln" t="IncludeFlat" />
       <e p="CommonGames.csproj" t="IncludeRecursive" />
+      <e p="CommonGames.Editor.csproj" t="IncludeRecursive" />
       <e p="CommonGames.EditorTools.csproj" t="IncludeRecursive" />
-      <e p="CommonGames.Singletons.Editor.csproj" t="IncludeRecursive" />
       <e p="Core.csproj" t="IncludeRecursive" />
-      <e p="ExtendedTransformInspector.csproj" t="IncludeRecursive" />
       <e p="Facepunch.Highlight.csproj" t="IncludeRecursive" />
       <e p="Klak.Extensions.csproj" t="IncludeRecursive" />
       <e p="Klak.Math.csproj" t="IncludeRecursive" />

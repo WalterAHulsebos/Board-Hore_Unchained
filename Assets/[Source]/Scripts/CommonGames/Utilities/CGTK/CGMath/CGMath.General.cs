@@ -118,5 +118,68 @@
 		//Returns the right vector of a quaternion
 		public static Vector3 GetRightVector(Quaternion q)
 			=> q * Vector3.right;
-	}
+
+        /// <summary>
+        /// Two non-parallel lines which may or may not touch each other have a point on each line which are closest
+        /// to each other. This function returns the closest point on line 1. 
+        /// </summary>
+        /// <param name="closestPointLine1">Output of the closest point on line 1.</param>
+        /// <param name="linePoint1">Origin of line 1.</param>
+        /// <param name="lineVec1">Direction of line 1.</param>
+        /// <param name="linePoint2">Origin of line 2.</param>
+        /// <param name="lineVec2">Direction of line 2.</param>
+        /// <returns>If the lines are not parallel, the function 
+        /// outputs true, otherwise false.</returns>
+        public static bool ClosestPointToLineOnLine(out Vector3 closestPointLine1, Vector3 linePoint1, Vector3 lineVec1, Vector3 linePoint2, Vector3 lineVec2)
+        {
+            Vector3 throwaway;
+            return ClosestPointsOnTwoLines(out closestPointLine1, out throwaway, linePoint1, lineVec1, linePoint2, lineVec2);
+        }
+
+        /// <summary>
+        /// Two non-parallel lines which may or may not touch each other have a point on each line which are closest
+        /// to each other. This function finds those two points. If the lines are not parallel, the function 
+        /// outputs true, otherwise false.
+        /// </summary>
+        /// <param name="closestPointLine1">Output of the closest point on line 1.</param>
+        /// <param name="closestPointLine2">Output of the closest point on line 2.</param>
+        /// <param name="linePoint1">Origin of line 1.</param>
+        /// <param name="lineVec1">Direction of line 1.</param>
+        /// <param name="linePoint2">Origin of line 2.</param>
+        /// <param name="lineVec2">Direction of line 2.</param>
+        /// <returns></returns>
+        public static bool ClosestPointsOnTwoLines(out Vector3 closestPointLine1, out Vector3 closestPointLine2, Vector3 linePoint1, Vector3 lineVec1, Vector3 linePoint2, Vector3 lineVec2)
+        {
+            closestPointLine1 = Vector3.zero;
+            closestPointLine2 = Vector3.zero;
+
+            float a = Vector3.Dot(lineVec1, lineVec1);
+            float b = Vector3.Dot(lineVec1, lineVec2);
+            float e = Vector3.Dot(lineVec2, lineVec2);
+
+            float d = a * e - b * b;
+
+            //lines are not parallel
+            if (!d.Approximately(0.0f))
+            {
+
+                Vector3 r = linePoint1 - linePoint2;
+                float c = Vector3.Dot(lineVec1, r);
+                float f = Vector3.Dot(lineVec2, r);
+
+                float s = (b * f - c * e) / d;
+                float t = (a * f - c * b) / d;
+
+                closestPointLine1 = linePoint1 + lineVec1 * s;
+                closestPointLine2 = linePoint2 + lineVec2 * t;
+
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
+    }
 }

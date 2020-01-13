@@ -23,7 +23,6 @@ namespace CommonGames.Utilities.CGTK
             private static string _lastStaticTimingDebug = string.Empty;
 
             #endregion
-            
 
             #region Custom Types
 

@@ -161,6 +161,8 @@ namespace CommonGames.Utilities.Extensions
             return string.Format($"{result.Hours}:{result.Minutes}:{result.Seconds}");
         }
 
+        #region Logging
+
         /// <summary> Logs a string value to the console. </summary>
         public static void Log(this string message)
         {
@@ -185,6 +187,59 @@ namespace CommonGames.Utilities.Extensions
                 CommonGames.Utilities.CGTK.CGDebug.LogError("Debug Logging Went Wrong");
             }
         }
+
+        #endregion
+
+        #region GetIfNull
+        
+        [PublicAPI]
+        public static T GetIfNull<T>(this T obj, in Func<T> getMethod) where T : Component
+            => obj ? obj : getMethod?.Invoke();
+        
+        #region GameObject Context
+        
+        [PublicAPI]
+        public static T GetIfNull<T>(this T obj, in GameObject context) where T : Component
+            => obj ? obj : context.GetComponent<T>();
+        
+        [PublicAPI]
+        public static T GetInChildrenIfNull<T>(this T obj, in GameObject context) where T : Component
+            => obj ? obj : context.GetComponentInChildren<T>();
+        
+        [PublicAPI]
+        public static T TryGetIfNull<T>(this T obj, in GameObject context) where T : Component
+        {
+            context.TryGetComponent(out T __returnedObject);
+            return __returnedObject;
+        }
+
+        [PublicAPI]
+        public static T TryGetInChildrenIfNull<T>(this T obj, in GameObject context) where T : Component
+            => context.TryGetComponent(out T __returnedObject) ? __returnedObject : context.GetComponentInChildren<T>();
+
+        #endregion
+
+        #region Component Context
+
+        [PublicAPI]
+        public static T GetIfNull<T>(this T obj, in Component context) where T : Component
+            => GetIfNull(obj, context.gameObject);
+
+        [PublicAPI]
+        public static T GetInChildrenIfNull<T>(this T obj, in Component context) where T : Component
+            => GetInChildrenIfNull(obj, context.gameObject);
+
+        [PublicAPI]
+        public static T TryGetIfNull<T>(this T obj, in Component context) where T : Component
+            => TryGetIfNull(obj, context.gameObject);
+
+        [PublicAPI]
+        public static T TryGetInChildrenIfNull<T>(this T obj, in Component context) where T : Component
+            => TryGetInChildrenIfNull(obj, context.gameObject);
+
+        #endregion
+
+        #endregion
     }
 
     public class ListArray<T>

@@ -1,9 +1,10 @@
 ﻿namespace CommonGames.Utilities
 {
+    using System.Collections.Generic;
     using UnityEngine;
+    using System.Collections.Generic;
 
     using JetBrains.Annotations;
-
     #if ODIN_INSPECTOR
     using ScriptableObject = Sirenix.OdinInspector.SerializedScriptableObject;
     #endif
@@ -27,8 +28,26 @@
             {
                 if(!InstanceExists)
                 {
+                    Resources.LoadAll(path: "", typeof(T));
+                    
+                    Debug.Log($"Gettting all of type {typeof(T)}");
+                    
                     _instance = Resources.FindObjectsOfTypeAll<T>()[0];
                 }
+
+                #if UNITY_EDITOR
+
+                List<Object> __preloadedAssets = new List<Object>();
+                __preloadedAssets.AddRange(UnityEditor.PlayerSettings.GetPreloadedAssets());
+
+                if (!__preloadedAssets.Contains(_instance))
+                {
+                    __preloadedAssets.Add(_instance);
+
+                    PlayerSettings.SetPreloadedAssets(__preloadedAssets.ToArray());
+                }
+                
+                #endif
 
                 return _instance;
             }
@@ -44,6 +63,7 @@
         #region Methods
 
         /// <summary> OnEnable method to associate Singleton with Instance. </summary>
+        [RuntimeInitializeOnLoadMethod]
         protected virtual void OnEnable()
         {
             if(InstanceExists)
