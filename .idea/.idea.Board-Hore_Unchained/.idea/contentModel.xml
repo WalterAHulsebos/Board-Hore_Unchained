@@ -114,6 +114,11 @@
               <e p="ShaderTest" t="Include">
                 <e p="StandardEdit.shader" t="Include" />
               </e>
+              <e p="Skateboard" t="Include">
+                <e p="Chris" t="Include">
+                  <e p="MC_AnimsTest.cs" t="Include" />
+                </e>
+              </e>
             </e>
             <e p="VFX" t="Include">
               <e p="Misc Effects" t="Include">
