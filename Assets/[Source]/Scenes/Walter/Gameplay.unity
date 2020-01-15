@@ -9748,6 +9748,12 @@ MonoBehaviour:
   - assemblyQualifiedName: SCPE.Sketch, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   m_AfterStackBundles:
+  - assemblyQualifiedName: Cavity, CommonGames, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - assemblyQualifiedName: Grayscale, CommonGames, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  - assemblyQualifiedName: LightLeak, CommonGames, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   - assemblyQualifiedName: Cavity, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   - assemblyQualifiedName: Grayscale, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,

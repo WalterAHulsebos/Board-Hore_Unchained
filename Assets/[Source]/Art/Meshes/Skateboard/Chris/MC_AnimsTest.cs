@@ -54,7 +54,7 @@ public class MC_AnimsTest : MonoBehaviour
         Down,
     }
 
-    [ReadOnly] [SerializeField]
+    //[ReadOnly] [SerializeField]
     private float 
         _timeAccelerated = 0f,
         _accelerateEvaluation = 0f,
@@ -65,10 +65,11 @@ public class MC_AnimsTest : MonoBehaviour
         _timeJumping = 0f,
         _jumpingEvaluation = 0f;
 
-    [ReadOnly] [SerializeField]
+    //[ReadOnly] [SerializeField]
     private bool
         _idle = false,
         _accelerate = false,
+        _decelerate = false,
         _cruise = false;
     
     private bool 
@@ -152,6 +153,8 @@ public class MC_AnimsTest : MonoBehaviour
                     _idle = false;
                     _accelerate = true;
 
+                    _decelerate = false;
+
                     SetAccelerate();
                 }
                 
@@ -160,21 +163,26 @@ public class MC_AnimsTest : MonoBehaviour
                     _accelerate = false;
                     _cruise = true;
 
+                    _decelerate = false;
+
                     SetCruise();
                 }
             }
         }
         else
         {
-            _timeDecelerated = decellerationCurve.TimeFromValue(value: _accelerateEvaluation); //Reverse calculate starting point (closest to).
-            
+            if(!_timeAccelerated.Approximately(default))
+            {
+                _timeDecelerated = decellerationCurve.TimeFromValue(value: _accelerateEvaluation); //Reverse calculate starting point (closest to).
+            }
+
             _timeAccelerated = default;
             _accelerateEvaluation = default; 
             
             //=====
 
             if(_chargingJump) return;
-            
+
             if(_cruise && Input.GetKey(KeyCode.S))
             {
                 SetIdle();
@@ -184,6 +192,10 @@ public class MC_AnimsTest : MonoBehaviour
                 
                 _idle = true;
             }
+            
+            __CalcDeceleration();
+            
+            __AnimationSwapping();
 
             void __CalcDeceleration()
             {
@@ -194,6 +206,32 @@ public class MC_AnimsTest : MonoBehaviour
                 float __lerpValue = decellerationCurve.Evaluate(_decelerateEvaluation);
             
                 currentVelocity = Mathf.Lerp(0, 1, __lerpValue);
+            }
+            
+            void __AnimationSwapping()
+            {
+                //Movement speed can't increase when you're charging for a jump.
+                if(_chargingJump) return;
+                
+                if(_cruise && (currentVelocity <= 0.9f))
+                {
+                    _cruise = false;
+                    _decelerate = true;
+                    
+                    _accelerate = true;
+
+                    SetAccelerate();
+                }
+                
+                if(_accelerate && (currentVelocity <= 0.5f))
+                {
+                    _accelerate = false;
+                    _decelerate = false;
+                    
+                    _idle = true;
+
+                    SetIdle();
+                }
             }
         }
     }
@@ -214,7 +252,7 @@ public class MC_AnimsTest : MonoBehaviour
             _cruise = false;
 
             _timeAccelerated = default;
-            _velocityEvaluation = default;
+            _accelerateEvaluation = default;
 
             _timeDecelerated = default;
             _decelerateEvaluation = default;
@@ -277,7 +315,7 @@ public class MC_AnimsTest : MonoBehaviour
     private void ResetValues
     (
         float _timeAccelerated = default,
-        float _velocityEvaluation = default,
+        float _accelerateEvaluation = default,
 
         float _timeDecelerated = default,
         float _decelerateEvaluation = default,
@@ -294,7 +332,7 @@ public class MC_AnimsTest : MonoBehaviour
     )
     {
         this._timeAccelerated = _timeAccelerated;
-        this._velocityEvaluation = _velocityEvaluation;
+        this._accelerateEvaluation = _accelerateEvaluation;
 
         this._timeDecelerated = _timeDecelerated;
         this._decelerateEvaluation = _decelerateEvaluation;
