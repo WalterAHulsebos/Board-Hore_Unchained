@@ -49,8 +49,8 @@ namespace Core.PlayerSystems.Movement
         
         [HideInInspector] public Vector3 averageColliderSurfaceNormal;
 
-        public static event Action<VehicleCore> LeavingGround_Event = vehicleCore => { };
-        public static event Action<VehicleCore> Landing_Event = vehicleCore => { };
+        public event Action LeavingGround_Event;
+        public event Action Landing_Event;
         
         [PublicAPI]
         [HideInInspector] public CGLock mayMove = new CGLock(0);
@@ -98,15 +98,17 @@ namespace Core.PlayerSystems.Movement
             
             switch (_prevGroundedState)
             {
-                case false when wheelsData.anyGrounded:
-                    Landing_Event(obj: this);
+                case false when !Grounded:
+                    //Landing_Event?.Invoke(obj: this);
+                    Landing_Event?.Invoke();
                     break;
-                case true when !wheelsData.anyGrounded:
-                    LeavingGround_Event(obj: this);
+                case true when Grounded:
+                    //LeavingGround_Event?.Invoke(obj: this);
+                    LeavingGround_Event?.Invoke();
                     break;
             }
 
-            _prevGroundedState = wheelsData.anyGrounded;
+            _prevGroundedState = Grounded;
         }
 
         private void InitializeVehicleBehaviours()

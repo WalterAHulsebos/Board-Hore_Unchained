@@ -519,6 +519,7 @@
                   <e p="Effects" t="Include">
                     <e p="BodyMovement.cs" t="Include" />
                     <e p="BodyTilting.cs" t="Include" />
+                    <e p="RigidbodyLockOnLeaveGround.cs" t="Include" />
                   </e>
                   <e p="Physics" t="Include">
                     <e p="Acceleration.cs" t="Include" />
