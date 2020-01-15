@@ -49,8 +49,13 @@ namespace Core.PlayerSystems.Movement
         
         [HideInInspector] public Vector3 averageColliderSurfaceNormal;
 
-        public event Action LeavingGround_Event;
-        public event Action Landing_Event;
+        public event Action 
+            LeavingGround_Event,
+            Landing_Event,
+            Accelerating_Event,
+            Decelerating_Event,
+            Idle_Event,
+            Cruise_Event;
         
         [PublicAPI]
         [HideInInspector] public CGLock mayMove = new CGLock(0);
@@ -111,6 +116,11 @@ namespace Core.PlayerSystems.Movement
             _prevGroundedState = Grounded;
         }
 
+        public void InvokeAccelerate() => Accelerating_Event?.Invoke();
+        public void InvokeDecelerate() => Decelerating_Event?.Invoke();
+        public void InvokeIdle() => Idle_Event?.Invoke();
+        public void InvokeCruise() => Cruise_Event?.Invoke();
+        
         private void InitializeVehicleBehaviours()
         {
             VehicleBehaviour[] __components = GetComponentsInChildren<VehicleBehaviour>();

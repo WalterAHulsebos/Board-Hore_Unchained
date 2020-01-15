@@ -59,27 +59,15 @@ namespace Core.PlayerSystems.Movement.Effects
             Down,
         }
 
-        //[ReadOnly] [SerializeField]
-        private float
-            _timeAccelerated = 0f,
-            _accelerateEvaluation = 0f,
-
-            _timeDecelerated = 0f,
-            _decelerateEvaluation = 0f,
-
-            _timeJumping = 0f,
-            _jumpingEvaluation = 0f;
-
-        //[ReadOnly] [SerializeField]
-        private bool
-            _idle = false,
-            _accelerate = false,
-            _decelerate = false,
-            _cruise = false;
 
         private bool
-            _chargingJump = false,
-            _jumping = false;
+            _isIdle = false,
+            _isDecelerating = false,
+            _isAccelerating = false,
+            _isCruising = false;
+        
+
+        //[ReadOnly] [SerializeField]
 
         private static readonly int A_ChargingJump = Animator.StringToHash("ChargingJump");
         private static readonly int A_Jump = Animator.StringToHash("Jump");
@@ -87,7 +75,8 @@ namespace Core.PlayerSystems.Movement.Effects
         private static readonly int A_Accelerate = Animator.StringToHash("Accelerate");
         private static readonly int A_Cruise = Animator.StringToHash("Cruise");
         private static readonly int A_Idle = Animator.StringToHash("Idle");
-        private static readonly int A_GoingUp = Animator.StringToHash("GoingUp");
+        private static readonly int A_GoingUp = Animator.StringToHash("GoinUp");
+        private static readonly int A_GoingDown = Animator.StringToHash("GoinDown");
         private static readonly int A_Landing = Animator.StringToHash("Landing");
 
         #endregion
@@ -102,6 +91,7 @@ namespace Core.PlayerSystems.Movement.Effects
             }
         }
 
+        /*
         private void OnEnable()
         {
             if(animator == null)
@@ -109,21 +99,110 @@ namespace Core.PlayerSystems.Movement.Effects
                 animator = GetComponent<Animator>();
             }
         }
+        */
+
+        public void OnEnable()
+        {
+            //base.OnEnable();
+
+            _vehicle.Idle_Event += IdleAnimations;
+            
+            _vehicle.Accelerating_Event += AccelerateAnimations;
+            _vehicle.Decelerating_Event += DecelerateAnimations;
+
+            _vehicle.Cruise_Event += CruiseAnimations;
+        }
 
         protected override void Start()
         {
             base.Start();
             
-            _idle = true;
+            IdleAnimations();
+        }
+
+        private void OnDestroy()
+        {
+            _vehicle.Idle_Event -= IdleAnimations;
+            
+            _vehicle.Accelerating_Event -= AccelerateAnimations;
+            _vehicle.Decelerating_Event -= DecelerateAnimations;
         }
 
         private void Update()
         {
-            DoJumping();
+            //DoJumping();
 
-            DoMovement();
+            //DoMovement();
         }
 
+        private void AccelerateAnimations()
+        {
+            if(!_isAccelerating)
+            {
+                Debug.Log("<color=cyan> Accelerating </color>");
+                
+                SetAccelerate();
+
+                ResetValues(isAccelerating: true);
+            }
+        }
+        
+        private void DecelerateAnimations()
+        {
+            if(!_isDecelerating)
+            {
+                Debug.Log("<color=teal> Decelerating </color>");
+
+                if(!_isCruising)
+                {
+                    SetCruise();   
+                }
+
+                ResetValues(isDecelerating: true);
+            }
+        }
+
+        private void IdleAnimations()
+        {
+            if(!_isIdle)
+            {
+                Debug.Log("<color=white> Idling </color>");
+
+                SetIdle();
+
+                ResetValues(isIdle: true);
+            }
+        }
+
+        private void CruiseAnimations()
+        {
+            if(!_isCruising)
+            {
+                Debug.Log("<color=green> Cruising </color>");
+
+                if(!_isDecelerating)
+                {
+                    SetCruise();   
+                }
+                
+                ResetValues(isCruising: true);
+            }
+        }
+
+        private void ResetValues(
+            bool isIdle = default,
+            bool isAccelerating = default,
+            bool isDecelerating = default,
+            bool isCruising = default
+        )
+        {
+            this._isIdle = (bool)isIdle;
+            this._isAccelerating = (bool)isAccelerating;
+            this._isDecelerating = (bool)isDecelerating;
+            this._isCruising = (bool)isCruising;
+        }
+
+        /*
         private void DoMovement()
         {
             //No movement if not grounded.
@@ -306,7 +385,9 @@ namespace Core.PlayerSystems.Movement.Effects
                 }
             }
         }
+        */
 
+        /*
         private void ResetValues(
             float _timeAccelerated = default,
             float _accelerateEvaluation = default,
@@ -341,6 +422,7 @@ namespace Core.PlayerSystems.Movement.Effects
             this._chargingJump = _chargingJump;
             this._jumping = _jumping;
         }
+        */
 
         #region Animation Adjusters
 
