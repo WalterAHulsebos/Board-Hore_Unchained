@@ -128,6 +128,7 @@ namespace Core.PlayerSystems.Movement.Effects
         {
             //No movement if not grounded.
             if(_jumping) return;
+            if(!_vehicle.Grounded) return;
 
             if(Input.GetKey(KeyCode.W))
             {
@@ -181,9 +182,7 @@ namespace Core.PlayerSystems.Movement.Effects
             {
                 if(!_timeAccelerated.Approximately(default))
                 {
-                    _timeDecelerated =
-                        decellerationCurve.TimeFromValue(
-                            value: _accelerateEvaluation); //Reverse calculate starting point (closest to).
+                    _timeDecelerated = decellerationCurve.TimeFromValue(value: _accelerateEvaluation); //Reverse calculate starting point (closest to).
                 }
 
                 _timeAccelerated = default;
@@ -255,21 +254,9 @@ namespace Core.PlayerSystems.Movement.Effects
                 _chargingJump = true;
             }
 
-            if(Input.GetKeyUp(KeyCode.Space) && _chargingJump  && _vehicle.Grounded)
+            if((Input.GetKeyUp(KeyCode.Space) && _chargingJump)  && _vehicle.Grounded)
             {
-                _idle = false;
-                _accelerate = false;
-                _cruise = false;
-
-                _timeAccelerated = default;
-                _accelerateEvaluation = default;
-
-                _timeDecelerated = default;
-                _decelerateEvaluation = default;
-
-                currentVelocity = default;
-
-                _jumping = true;
+                ResetValues(_jumping: true);
 
                 SetJump();
             }
