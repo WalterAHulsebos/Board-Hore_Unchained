@@ -94,7 +94,7 @@ namespace Core.PlayerSystems.Movement.Effects
         {
             base.Start();
             
-            IdleAnimations();
+            //IdleAnimations();
         }
 
         private void OnDestroy()
@@ -113,9 +113,11 @@ namespace Core.PlayerSystems.Movement.Effects
 
         private void AccelerateAnimations()
         {
+            if(!_vehicle.Grounded) return;
+            
             if(!_isAccelerating)
             {
-                //Debug.Log("<color=cyan> Accelerating </color>");
+                Debug.Log("<color=cyan> Accelerating </color>");
                 
                 SetAccelerate();
 
@@ -125,9 +127,11 @@ namespace Core.PlayerSystems.Movement.Effects
         
         private void DecelerateAnimations()
         {
+            if(!_vehicle.Grounded) return;
+            
             if(!_isDecelerating)
             {
-                //Debug.Log("<color=teal> Decelerating </color>");
+                Debug.Log("<color=teal> Decelerating </color>");
 
                 if(!_isCruising)
                 {
@@ -152,6 +156,8 @@ namespace Core.PlayerSystems.Movement.Effects
 
         private void CruiseAnimations()
         {
+            if(!_vehicle.Grounded) return;
+            
             if(!_isCruising)
             {
                 //Debug.Log("<color=green> Cruising </color>");

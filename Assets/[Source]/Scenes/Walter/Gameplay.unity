@@ -1197,7 +1197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &220019446
 Transform:
   m_ObjectHideFlags: 0
@@ -12033,7 +12033,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1881441938
 Transform:
   m_ObjectHideFlags: 0
@@ -12117,101 +12117,6 @@ MonoBehaviour:
     SerializationNodes: []
   _vehicle: {fileID: 853829863}
   animator: {fileID: 1881441940}
-  accelerationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.0000038146973
-      value: 0.3027954
-      inSlope: 0.06907008
-      outSlope: 0.06907008
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.17073171
-    - serializedVersion: 3
-      time: 0.81830215
-      value: 0.791166
-      inSlope: 0.9548237
-      outSlope: 0.9548237
-      tangentMode: 1
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0.05525619
-      outSlope: -0.05525619
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.17073172
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  decellerationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -0.057539374
-      outSlope: -0.057539374
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.49186993
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jumpCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  timeTillMaxSpeed: 8
-  timeTillMinSpeed: 4
-  timeTillJumpApex: 2
-  currentVelocity: 0
-  currentJump: 0
 --- !u!95 &1881441940
 Animator:
   serializedVersion: 3
@@ -12222,10 +12127,10 @@ Animator:
   m_GameObject: {fileID: 1881441937}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: a5f322ea4d191914cb1dd2be9db429d0, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0b65e94e00def024696e8933e0ba1a02, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8a131a800973faf4496279fece06e529, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -13132,7 +13037,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089025242}
-  m_LocalRotation: {x: -0.0067964983, y: 0.1858756, z: 0.05475626, w: 0.98102283}
+  m_LocalRotation: {x: -0.006796499, y: 0.1858756, z: 0.054756265, w: 0.98102283}
   m_LocalPosition: {x: -0.029598564, y: -0.00013128502, z: -0.0002044039}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
