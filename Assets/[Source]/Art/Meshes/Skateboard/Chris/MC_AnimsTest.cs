@@ -89,14 +89,7 @@ namespace Core.PlayerSystems.Movement.Effects
             _vehicle.Jump_Event += JumpAnimations;
             _vehicle.Landing_Event += LandingAnimations;
         }
-
-        protected override void Start()
-        {
-            base.Start();
-            
-            //IdleAnimations();
-        }
-
+        
         private void OnDestroy()
         {
             _vehicle.Idle_Event -= IdleAnimations;
