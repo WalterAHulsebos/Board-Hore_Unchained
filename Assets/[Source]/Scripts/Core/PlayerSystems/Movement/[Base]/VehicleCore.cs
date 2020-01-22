@@ -55,12 +55,18 @@ namespace Core.PlayerSystems.Movement
             Accelerating_Event,
             Decelerating_Event,
             Idle_Event,
-            Cruise_Event;
+            Cruise_Event,
+            StartJumpCharge_Event,
+            Jump_Event;
         
         [PublicAPI]
         [HideInInspector] public CGLock mayMove = new CGLock(0);
         
         private bool _prevGroundedState;
+
+
+        private float _timeOfLastLanding = -1f;
+        private const double _N_SECONDS = 0.1d;
         
         #endregion
         
@@ -99,8 +105,21 @@ namespace Core.PlayerSystems.Movement
             if(PrefabCheckHelper.CheckIfPrefab(this)) return;
             if(!Application.isPlaying) return;
             
-            groundedDebug = Grounded;
+            if(Grounded && _prevGroundedState == false)
+            {
+                if(Time.time >= _timeOfLastLanding + _N_SECONDS)
+                {
+                    _timeOfLastLanding = Time.time;
+                    Landing_Event?.Invoke();
+                }
+            }
+            else if(!Grounded && _prevGroundedState == true)
+            {
+                LeavingGround_Event?.Invoke();
+            }
+            _prevGroundedState = Grounded;
             
+            /*
             switch (_prevGroundedState)
             {
                 case false when !Grounded:
@@ -112,14 +131,17 @@ namespace Core.PlayerSystems.Movement
                     LeavingGround_Event?.Invoke();
                     break;
             }
+            */
 
-            _prevGroundedState = Grounded;
+            //_prevGroundedState = Grounded;
         }
 
         public void InvokeAccelerate() => Accelerating_Event?.Invoke();
         public void InvokeDecelerate() => Decelerating_Event?.Invoke();
         public void InvokeIdle() => Idle_Event?.Invoke();
         public void InvokeCruise() => Cruise_Event?.Invoke();
+        public void InvokeJumpCharge() => StartJumpCharge_Event?.Invoke();
+        public void InvokeJump() => Jump_Event?.Invoke();
         
         private void InitializeVehicleBehaviours()
         {

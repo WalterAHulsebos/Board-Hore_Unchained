@@ -21,35 +21,6 @@ namespace Core.PlayerSystems.Movement.Effects
         [Required]
         [SerializeField] private Animator animator = null;
 
-        [SerializeField] private AnimationCurve
-            accelerationCurve =
-                AnimationCurve.EaseInOut(timeStart: 0, timeEnd: 1, valueStart: 0, valueEnd: 1),
-
-            decellerationCurve =
-                AnimationCurve.EaseInOut(timeStart: 0, timeEnd: 1, valueStart: 1, valueEnd: 0),
-
-            jumpCurve = new AnimationCurve(new Keyframe[]
-            {
-                new Keyframe(time: 0f, value: 0f), new Keyframe(time: .5f, value: 1f), new Keyframe(time: 1, value: 0)
-            });
-
-        [SerializeField] private float
-            timeTillMaxSpeed = 10f,
-            timeTillMinSpeed = 4f,
-            timeTillJumpApex = 2f;
-
-        [Range(0, 1)]
-        [ReadOnly]
-        [SerializeField]
-        private float currentVelocity = 0f;
-
-        [Range(0, 1)]
-        [ReadOnly]
-        [SerializeField]
-        private float currentJump = 0f;
-
-        private float _lastJump = 0f;
-
         private JumpDirection _jumpDirection = JumpDirection.None;
 
         private enum JumpDirection
@@ -64,20 +35,22 @@ namespace Core.PlayerSystems.Movement.Effects
             _isIdle = false,
             _isDecelerating = false,
             _isAccelerating = false,
-            _isCruising = false;
+            _isCruising = false,
+
+            _isChargingJump = false,
+            _isJumping = false;
         
-
-        //[ReadOnly] [SerializeField]
-
-        private static readonly int A_ChargingJump = Animator.StringToHash("ChargingJump");
-        private static readonly int A_Jump = Animator.StringToHash("Jump");
-
         private static readonly int A_Accelerate = Animator.StringToHash("Accelerate");
         private static readonly int A_Cruise = Animator.StringToHash("Cruise");
         private static readonly int A_Idle = Animator.StringToHash("Idle");
+
+        private static readonly int A_ChargingJump = Animator.StringToHash("ChargingJump");
+        private static readonly int A_Jump = Animator.StringToHash("Jump");
+        
+        private static readonly int A_Landing = Animator.StringToHash("Landing");
+        
         private static readonly int A_GoingUp = Animator.StringToHash("GoinUp");
         private static readonly int A_GoingDown = Animator.StringToHash("GoinDown");
-        private static readonly int A_Landing = Animator.StringToHash("Landing");
 
         #endregion
 
@@ -111,6 +84,10 @@ namespace Core.PlayerSystems.Movement.Effects
             _vehicle.Decelerating_Event += DecelerateAnimations;
 
             _vehicle.Cruise_Event += CruiseAnimations;
+
+            _vehicle.StartJumpCharge_Event += JumpChargeAnimations;
+            _vehicle.Jump_Event += JumpAnimations;
+            _vehicle.Landing_Event += LandingAnimations;
         }
 
         protected override void Start()
@@ -126,20 +103,19 @@ namespace Core.PlayerSystems.Movement.Effects
             
             _vehicle.Accelerating_Event -= AccelerateAnimations;
             _vehicle.Decelerating_Event -= DecelerateAnimations;
-        }
+            
+            _vehicle.Cruise_Event -= CruiseAnimations;
 
-        private void Update()
-        {
-            //DoJumping();
-
-            //DoMovement();
+            _vehicle.StartJumpCharge_Event -= JumpChargeAnimations;
+            _vehicle.Jump_Event -= JumpAnimations;
+            _vehicle.Landing_Event -= LandingAnimations;
         }
 
         private void AccelerateAnimations()
         {
             if(!_isAccelerating)
             {
-                Debug.Log("<color=cyan> Accelerating </color>");
+                //Debug.Log("<color=cyan> Accelerating </color>");
                 
                 SetAccelerate();
 
@@ -151,7 +127,7 @@ namespace Core.PlayerSystems.Movement.Effects
         {
             if(!_isDecelerating)
             {
-                Debug.Log("<color=teal> Decelerating </color>");
+                //Debug.Log("<color=teal> Decelerating </color>");
 
                 if(!_isCruising)
                 {
@@ -166,7 +142,7 @@ namespace Core.PlayerSystems.Movement.Effects
         {
             if(!_isIdle)
             {
-                Debug.Log("<color=white> Idling </color>");
+                //Debug.Log("<color=white> Idling </color>");
 
                 SetIdle();
 
@@ -178,7 +154,7 @@ namespace Core.PlayerSystems.Movement.Effects
         {
             if(!_isCruising)
             {
-                Debug.Log("<color=green> Cruising </color>");
+                //Debug.Log("<color=green> Cruising </color>");
 
                 if(!_isDecelerating)
                 {
@@ -188,18 +164,56 @@ namespace Core.PlayerSystems.Movement.Effects
                 ResetValues(isCruising: true);
             }
         }
+        
+        private void JumpChargeAnimations()
+        {
+            if(!_isChargingJump)
+            {
+                Debug.Log("<color=pink> Charging Jump </color>");
+
+                SetChargingJump(state: true);
+                
+                ResetValues(isChargingJump: true);
+            }
+        }
+
+        private void JumpAnimations()
+        {
+            if(!_isJumping)
+            {
+                Debug.Log("<color=yellow> Jump! </color>");
+
+                SetJump();
+                
+                ResetValues(isChargingJump: true);
+            }
+        }
+        
+        private void LandingAnimations()
+        {
+            Debug.Log("<color=purple> LANDING! </color>");
+
+            SetLanding();
+                
+            ResetValues();
+        }
+
 
         private void ResetValues(
             bool isIdle = default,
             bool isAccelerating = default,
             bool isDecelerating = default,
-            bool isCruising = default
+            bool isCruising = default,
+            
+            bool isChargingJump = default
         )
         {
             this._isIdle = (bool)isIdle;
             this._isAccelerating = (bool)isAccelerating;
             this._isDecelerating = (bool)isDecelerating;
             this._isCruising = (bool)isCruising;
+            
+            this._isChargingJump = (bool)isChargingJump;
         }
 
         /*
@@ -426,9 +440,9 @@ namespace Core.PlayerSystems.Movement.Effects
 
         #region Animation Adjusters
 
-        private void SetChargingJump()
+        private void SetChargingJump(bool state)
         {
-            animator.SetBool(id: A_ChargingJump, true);
+            animator.SetBool(id: A_ChargingJump, state);
         }
 
         private void SetJump()
@@ -438,7 +452,10 @@ namespace Core.PlayerSystems.Movement.Effects
             animator.SetTrigger(id: A_Jump);
         }
 
-        private void SetLanding() => animator.SetTrigger(A_Landing);
+        private void SetLanding()
+        {
+            animator.SetTrigger(A_Landing);   
+        }
 
         private void SetIdle() => animator.SetTrigger(A_Idle);
 

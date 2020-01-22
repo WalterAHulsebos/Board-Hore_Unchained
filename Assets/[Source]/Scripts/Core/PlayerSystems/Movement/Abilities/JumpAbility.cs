@@ -52,6 +52,8 @@ namespace Core.PlayerSystems.Movement.Abilities
             {
                 if(_vehicle.mayMove > 0) return;
                 
+                _vehicle.InvokeJumpCharge();
+                
                 _holdingJump = true;
             }
             
@@ -59,9 +61,11 @@ namespace Core.PlayerSystems.Movement.Abilities
             {
                 _holdingJump = false;
                 _stoppedHoldingJump = true;
-                    
+
                 if(_vehicle.mayMove > 0) return;
                     
+                _vehicle.InvokeJump();
+                
                 DoAbility();
             }
         }
@@ -71,6 +75,8 @@ namespace Core.PlayerSystems.Movement.Abilities
             base.AbilityUpdate();
 
             if(!_holdingJump) return;
+            
+            //if()
             
             CurrentCharge += (100f / maxChargeDuration) * Time.deltaTime;
 
